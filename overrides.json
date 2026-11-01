@@ -7,13 +7,6 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andrew%20Lloyd%20Webber%E2%80%99s%20Starlight%20Express",
     "suggestions": []
   },
-  "Doctor Who: The Satan Pit": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/doctor-who-the-satan-pit/HO00009550/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Doctor%20Who%3A%20The%20Satan%20Pit",
-    "suggestions": []
-  },
   "Festive Fun with Peppa Cinema Experience": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
@@ -42,19 +35,10 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Hadestown%3A%20The%20Musical",
     "suggestions": []
   },
-  "Ken Russell's The Devils": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/ken-russell-s-the-devils/HO00009751/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Ken%20Russell%27s%20The%20Devils",
-    "suggestions": [
-      "31767 = The Devils (1971) https://www.themoviedb.org/movie/31767"
-    ]
-  },
   "Mission Santa": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/mission-santa/HO00009086/",
+    "odeon_link": "https://www.odeon.co.uk/films/mission-santa/HO00009085/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Mission%20Santa",
     "suggestions": [
       "1455686 = Mission Santa: Yoyo To The Rescue (2025) https://www.themoviedb.org/movie/1455686",
@@ -157,5 +141,21 @@
     "odeon_link": "https://www.odeon.co.uk/films/cbeebies-panto-2026-treasure-island/HO00009679/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=CBeebies%20Panto%202026%3A%20Treasure%20Island",
     "suggestions": []
+  },
+  "Doctor Who: The Satan Pit": {
+    "tmdb_id": 1770183,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/doctor-who-the-satan-pit/HO00009550/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Doctor%20Who%3A%20The%20Satan%20Pit",
+    "suggestions": []
+  },
+  "Ken Russell's The Devils": {
+    "tmdb_id": 31767,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/ken-russell-s-the-devils/HO00009751/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Ken%20Russell%27s%20The%20Devils",
+    "suggestions": [
+      "31767 = The Devils (1971) https://www.themoviedb.org/movie/31767"
+    ]
   }
 }
