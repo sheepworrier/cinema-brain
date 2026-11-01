@@ -4,7 +4,7 @@ A weekly page of what's showing at ODEON Brighton, plus films coming in the next
 its IMDb rating, cast, certificate and series info. You can sort and filter, and every view can be shared
 by link (the state lives in the URL).
 
-- `cinemabrain/sources/odeon.py`: opens real Chrome (needed to get past Cloudflare), grabs the
+- `cinemabrain/sources/`: `odeon.py` and `cineworld.py` open real Chrome (needed to get past Cloudflare); `picturehouse.py` (Duke of York's, Komedia) and `depot.py` (Lewes) use plain HTTP. ODEON grabs the
   ODEON API token, then pulls showtimes, films and certificates. To add cinemas later, write another
   Source and add it to `sources()` in `cinemabrain/build.py`.
 - `cinemabrain/enrich/tmdb.py`: cast, IMDb id and "Part of a series" (TMDB collection).
@@ -22,3 +22,5 @@ tail -50 ~/Library/Logs/cinemabrain.log            # weekly job log
 
 URL parameters: `tab=now|soon`, `days=sat,sun`, `after=17:00`, `before=21:00`, `cert=U|PG|12A|15`
 (max), `series=yes|no`, `min=7`, `q=text`, `sort=imdb|votes|title|time|cert|runtime|release`, `dir=asc|desc`.
+
+Cinemas: the page shows ODEON Brighton only by default; `cinema=all` or `cinema=komedia,duke-of-yorks` (ids: odeon-brighton, duke-of-yorks, komedia, cineworld-brighton, lewes-depot) selects others.

@@ -14,7 +14,10 @@ from zoneinfo import ZoneInfo
 
 from .enrich import imdb_ratings
 from .enrich.tmdb import Tmdb, mark_rereleases, update_overrides
+from .sources.cineworld import CineworldSource
+from .sources.depot import DepotSource
 from .sources.odeon import OdeonSource
+from .sources.picturehouse import PicturehouseSource
 from .util import ROOT, load_env
 
 DAYS = 7
@@ -23,7 +26,14 @@ LONDON = ZoneInfo("Europe/London")
 
 
 def sources():
-    return [OdeonSource("824", "brighton", "ODEON Brighton")]
+    # Order matters: the first cinema's title/details win when the same film is merged.
+    return [
+        OdeonSource("824", "brighton", "ODEON Brighton"),
+        PicturehouseSource("duke-of-yorks", "008", "duke-of-york-s-picturehouse", "Duke of York's"),
+        PicturehouseSource("komedia", "019", "duke-s-at-komedia", "Duke's at Komedia"),
+        CineworldSource(),
+        DepotSource(),
+    ]
 
 
 def merge(all_films: list[dict]) -> list[dict]:
@@ -39,8 +49,19 @@ def merge(all_films: list[dict]) -> list[dict]:
         m = out[k]
         m["links"].update(f["links"])
         m["bookingFrom"].update(f["bookingFrom"])
+        m["soonAt"] = sorted(set(m.get("soonAt", [])) | set(f.get("soonAt", [])))
+        for k in ("runtime", "release", "certNote"):
+            m[k] = m.get(k) or f.get(k)
+        if m.get("cert") == "TBC" and f.get("cert") != "TBC":
+            m["cert"] = f["cert"]
+        if len(f.get("synopsis") or "") > len(m.get("synopsis") or ""):
+            m["synopsis"] = f["synopsis"]
+        m["actors"] = m.get("actors") or f.get("actors") or []
+        m["genres"] = m.get("genres") or f.get("genres") or []
+        m["rerelease"] = m.get("rerelease") or f.get("rerelease")
+        m["isEvent"] = m.get("isEvent") or f.get("isEvent")
         m["shows"] = sorted(m["shows"] + f["shows"], key=lambda s: (s["d"], s["t"]))
-        m["comingSoon"] = m["comingSoon"] or f["comingSoon"]
+        m["comingSoon"] = bool(m["soonAt"])
     return list(out.values())
 
 
@@ -53,18 +74,29 @@ def main():
 
     now = datetime.now(LONDON)
     start = now.date()
-    cinemas, films = [], []
+    cinemas, films, errors = [], [], {}
     for src in sources():
-        raw = ROOT / "cache" / f"raw_{src.cinema['id']}.json"
-        if args.reuse_raw and raw.exists():
-            got = json.loads(raw.read_text())
-        else:
-            print(f"Fetching {src.cinema['name']} ...")
-            got = src.fetch(start, DAYS, SOON_DAYS)
-            raw.parent.mkdir(exist_ok=True)
-            raw.write_text(json.dumps(got, indent=1))
-        cinemas.append(src.cinema)
+        cin = src.cinema
+        raw = ROOT / "cache" / f"raw_{cin['id']}.json"
+        try:
+            if args.reuse_raw and raw.exists():
+                got = json.loads(raw.read_text())
+            else:
+                print(f"Fetching {cin['name']} ...")
+                got = src.fetch(start, DAYS, SOON_DAYS)
+                raw.parent.mkdir(exist_ok=True)
+                raw.write_text(json.dumps(got, indent=1))
+        except Exception as e:  # one cinema failing must not lose the others
+            errors[cin["id"]] = f"{type(e).__name__}: {e}"[:300]
+            print(f"  ! {cin['name']} FAILED: {errors[cin['id']]}")
+            continue
+        for f in got:
+            f["soonAt"] = [cin["id"]] if f.get("comingSoon") else []
+        print(f"  {cin['name']}: {len(got)} films, {sum(len(f['shows']) for f in got)} showtimes")
+        cinemas.append(cin)
         films.extend(got)
+    if not films:
+        raise SystemExit("No cinema returned any data - not overwriting docs/data.json")
 
     print("Enriching via TMDB ...")
     tm = Tmdb()
@@ -85,6 +117,7 @@ def main():
         "dates": dates,
         "soonUntil": (start + timedelta(days=SOON_DAYS)).isoformat(),
         "cinemas": cinemas,
+        "errors": errors,
         "films": films,
     }
 
@@ -104,7 +137,10 @@ def main():
         out = ROOT / "docs" / "data.json"
         out.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")))
         print(f"Wrote {out}")
-    (ROOT / "cache" / "last_summary.txt").write_text(f"{now_n} films now showing, {soon_n} coming soon")
+    summary = f"{now_n} films now showing, {soon_n} coming soon, {len(cinemas)} cinemas"
+    if errors:
+        summary += " - FAILED: " + ", ".join(errors)
+    (ROOT / "cache" / "last_summary.txt").write_text(summary)
 
 
 if __name__ == "__main__":

@@ -42,8 +42,21 @@ EVENT_HINT = re.compile(
 )
 
 
+EXTRA_PREFIX = re.compile(
+    r"^(cinecity \d{4}\s*:\s*|duke'?s after dark\s*:\s*|fears for queers\s*:\s*|parent (&|and) baby only\s*:\s*|"
+    r"ukjff \d{4}\s*:\s*|kids'? club\s*:\s*|rediscover\s*:\s*)",
+    re.I,
+)
+EXTRA_SUFFIX = re.compile(
+    r"(\s*\((cinecity|35mm|70mm|u|pg|12a|15|18)\)|\s*\+\s*(q ?& ?a|recorded|special|intro|live|pumpkin|jane|joe)\b.*"
+    r"|\s+\d+(st|nd|rd|th) anniversary.*|\s+(4k|2k) (restoration|remaster).*|\s*\(\d{4} encore\))\s*$",
+    re.I,
+)
+
+
 def clean_title(t: str) -> str:
-    t = STRIP_PREFIX.sub("", t.strip())
+    t = EXTRA_PREFIX.sub("", STRIP_PREFIX.sub("", t.strip()))
+    t = EXTRA_SUFFIX.sub("", t)
     for _ in range(2):
         t = STRIP_SUFFIX.sub("", t)
         t = SUFFIX_WORDS.sub("", t)
@@ -62,6 +75,7 @@ class Tmdb:
             self._q = {"api_key": key}
         self.cache = json.loads(CACHE.read_text()) if CACHE.exists() else {}
         self.overrides = json.loads(OVERRIDES.read_text()) if OVERRIDES.exists() else {}
+        self._run: dict = {}
 
     def _get(self, path: str, **params) -> dict:
         q = urllib.parse.urlencode({**self._q, **params})
@@ -102,15 +116,18 @@ class Tmdb:
         if film.get("isEvent") or EVENT_HINT.search(title):
             return None
         ck = f"{title}|{film.get('release') or ''}"
-        if ck in self.cache.get("match", {}):
+        if self.cache.get("match", {}).get(ck) is not None:  # only hits are cached; misses are retried
             return self.cache["match"][ck]
         year = int(film["release"][:4]) if film.get("release") else None
         mid = self._search(clean_title(title), year)
-        self.cache.setdefault("match", {})[ck] = mid
+        if mid is not None:
+            self.cache.setdefault("match", {})[ck] = mid
         return mid
 
     def details(self, mid: int) -> dict:
         ck = str(mid)
+        if ck in self._run:
+            return self._run[ck]
         # Re-fetch details each run (cast/collections get filled in as release approaches)
         d = self._get(f"/movie/{mid}", append_to_response="credits,external_ids")
         cast = [c["name"] for c in sorted(d.get("credits", {}).get("cast", []), key=lambda c: c.get("order", 99))][:4]
@@ -125,6 +142,7 @@ class Tmdb:
             "series": {"name": coll["name"], "url": f"https://www.themoviedb.org/collection/{coll['id']}"} if coll else None,
         }
         self.cache.setdefault("details", {})[ck] = info
+        self._run[ck] = info
         return info
 
     def enrich(self, films: list[dict]) -> None:

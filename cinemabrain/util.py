@@ -43,3 +43,18 @@ def norm_title(s: str) -> str:
     s = s.replace("&", " and ")
     s = re.sub(r"[^a-z0-9]+", " ", s)
     return re.sub(r"\s+", " ", s).strip()
+
+
+CERT_MAP = {"U": "U", "UC": "U", "PG": "PG", "12A": "12A", "12": "12A", "15": "15", "18": "18", "R18": "18"}
+
+
+def norm_cert(c: str | None) -> str:
+    """Normalise a certificate string to U / PG / 12A / 15 / 18 / TBC."""
+    return CERT_MAP.get((c or "").strip().upper().replace(" ", ""), "TBC")
+
+
+def clean_tag(t: str) -> str:
+    """'Format.Experience.ScreenX' -> 'ScreenX'; 'ScreenX' stays; CamelCase -> words."""
+    import re as _re
+    last = t.split(".")[-1]
+    return _re.sub(r"(?<=[a-z])(?=[A-Z])", " ", last).strip()

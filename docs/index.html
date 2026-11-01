@@ -11,10 +11,12 @@
   --bg:#f6f5f2; --card:#fff; --ink:#1a1a1a; --muted:#6a6a6a; --line:#e3e0da;
   --accent:#8a1c2b; --chip:#f0eeea; --shadow:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
   --ode:#1d4ed8; --series:#5b21b6;
+  --c0:#1d4ed8;--c1:#7a3b8f;--c2:#b45309;--c3:#047857;--c4:#be123c;
 }
 @media (prefers-color-scheme:dark){
   :root{--bg:#141414;--card:#1e1e1e;--ink:#eceae6;--muted:#9d9a94;--line:#333;
-        --accent:#e88a96;--chip:#2a2a2a;--shadow:none;--ode:#8fb2ff;--series:#c4b5fd;}
+        --accent:#e88a96;--chip:#2a2a2a;--shadow:none;--ode:#8fb2ff;--series:#c4b5fd;
+        --c0:#8fb2ff;--c1:#c79bd8;--c2:#f0b25c;--c3:#6dd6a8;--c4:#f493a8;}
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);
@@ -76,6 +78,13 @@ details.syn[open] summary .chev{transform:rotate(180deg)}
 .shows{margin-top:11px;border-top:1px solid var(--line);padding-top:10px;display:grid;gap:7px}
 .dayrow{display:flex;gap:9px;align-items:baseline}
 .dayname{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ode);min-width:58px;flex-shrink:0}
+.venue{display:grid;gap:5px}
+.venue+.venue{margin-top:6px}
+.vname{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border-bottom:1px dotted currentColor;justify-self:start}
+.vname:hover{border-bottom-style:solid}
+.venue .dayname{color:var(--muted)}
+.c0{color:var(--c0)}.c1{color:var(--c1)}.c2{color:var(--c2)}.c3{color:var(--c3)}.c4{color:var(--c4)}
+.warn{font-size:12.5px;color:#b45309;margin:0 0 10px}
 .times{display:flex;gap:5px;flex-wrap:wrap}
 .time{font-size:13px;font-variant-numeric:tabular-nums;background:var(--chip);border-radius:6px;padding:3px 7px;white-space:nowrap;text-decoration:none}
 a.time:hover{outline:1px solid var(--accent)}
@@ -92,8 +101,9 @@ footer a{color:var(--accent)}
 </head>
 <body>
 <div class="wrap">
-<h1>What's on — ODEON Brighton</h1>
+<h1 id="h1">What's on — ODEON Brighton</h1>
 <p class="sub" id="sub">Loading…</p>
+<p class="warn" id="warn" hidden></p>
 
 <div class="tabs" role="tablist">
   <button class="tab" role="tab" data-tab="now" aria-selected="true">Now showing<span class="n" id="n-now"></span></button>
@@ -107,6 +117,7 @@ footer a{color:var(--accent)}
     <button class="btn primary" id="share">🔗 Copy link</button>
   </div>
   <div class="panel" id="panel">
+  <div class="row" id="cinrow" hidden><span class="lbl">Cinema</span></div>
   <div class="row now-only" id="dayrow"><span class="lbl">Day</span></div>
   <div class="row">
     <span class="lbl">Rated</span>
@@ -143,7 +154,6 @@ footer a{color:var(--accent)}
       <select id="series" aria-label="Part of a series">
         <option value="">Any</option><option value="yes">Part of a series</option><option value="no">Stand-alone only</option>
       </select>
-      <select id="cinema" aria-label="Cinema" hidden></select>
     </div>
   <div class="row">
     <button class="btn" id="reset">Reset all filters</button>
@@ -156,7 +166,7 @@ footer a{color:var(--accent)}
 <div id="list"></div>
 
 <footer>
-  <p>Listings from <a href="https://www.odeon.co.uk/cinemas/brighton/">ODEON Brighton</a>'s booking system. Ratings and votes from IMDb's public dataset. Cast and series info from <a href="https://www.themoviedb.org/">TMDB</a> (this product uses the TMDB API but is not endorsed or certified by TMDB). Click a showtime to book. Times can change, so check before you travel.</p>
+  <p>Listings from each cinema's own booking system: <a href="https://www.odeon.co.uk/cinemas/brighton/">ODEON Brighton</a> (Kingswest), <a href="https://www.picturehouses.com/cinema/duke-of-york-s-picturehouse">Duke of York's</a>, <a href="https://www.picturehouses.com/cinema/duke-s-at-komedia">Duke's at Komedia</a>, <a href="https://www.cineworld.co.uk/cinemas/brighton/014">Cineworld Brighton Marina</a> and <a href="https://lewesdepot.org/whats-on/calendar">Depot, Lewes</a>. Only ODEON Brighton is shown unless you pick more cinemas. Ratings and votes from IMDb's public dataset. Cast and series info from <a href="https://www.themoviedb.org/">TMDB</a> (this product uses the TMDB API but is not endorsed or certified by TMDB). Click a showtime to book. Times can change, so check before you travel.</p>
   <p>Your filters and sort are saved in the page address. Bookmark it, or use <b>Copy link</b> to share exactly this view.</p>
 </footer>
 </div>
@@ -172,6 +182,10 @@ const SORTS={
 const DEF_SORT={now:["imdb","desc"],soon:["release","asc"]};
 const DEF_DIR={imdb:"desc",votes:"desc",title:"asc",time:"asc",cert:"asc",runtime:"asc",release:"asc"};
 let DATA=null, CIN={};
+const DEFAULT_CINEMA="odeon-brighton";
+const defaultCinemas=()=>DATA.cinemas.some(c=>c.id===DEFAULT_CINEMA)?[DEFAULT_CINEMA]:DATA.cinemas.map(c=>c.id);
+const sameSet=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
+const cinIdx=id=>Math.max(0,DATA.cinemas.findIndex(c=>c.id===id));
 const S={}; // current state
 
 const $=id=>document.getElementById(id);
@@ -191,7 +205,10 @@ function readURL(){
   S.after=p.get("after")||""; S.before=p.get("before")||"";
   S.cert=CERTS.includes(p.get("cert"))?p.get("cert"):"";
   S.series=["yes","no"].includes(p.get("series"))?p.get("series"):"";
-  S.min=p.get("min")||""; S.q=p.get("q")||""; S.cinema=p.get("cinema")||"";
+  S.min=p.get("min")||""; S.q=p.get("q")||"";
+  const ids=DATA.cinemas.map(c=>c.id), cp=p.get("cinema");
+  const want=cp==="all"?ids:(cp||"").split(",").filter(x=>ids.includes(x));
+  S.cinemas=want.length?want:defaultCinemas();
   const valid=SORTS[S.tab].map(x=>x[0]);
   S.sort=valid.includes(p.get("sort"))?p.get("sort"):DEF_SORT[S.tab][0];
   S.dir=["asc","desc"].includes(p.get("dir"))?p.get("dir"):(p.get("sort")?DEF_DIR[S.sort]:DEF_SORT[S.tab][1]);
@@ -207,7 +224,7 @@ function writeURL(){
   if(S.cert)p.set("cert",S.cert);
   if(S.series)p.set("series",S.series);
   if(S.min)p.set("min",S.min);
-  if(S.cinema)p.set("cinema",S.cinema);
+  if(!sameSet(S.cinemas,defaultCinemas()))p.set("cinema",sameSet(S.cinemas,DATA.cinemas.map(c=>c.id))?"all":S.cinemas.join(","));
   if(S.q)p.set("q",S.q);
   const [ds,dd]=DEF_SORT[S.tab];
   if(S.sort!==ds||S.dir!==dd){p.set("sort",S.sort);if(S.dir!==DEF_DIR[S.sort])p.set("dir",S.dir);}
@@ -218,7 +235,7 @@ function writeURL(){
 // ---------- filtering ----------
 function showsFor(f){
   return f.shows.filter(s=>{
-    if(S.cinema&&s.c!==S.cinema)return false;
+    if(!S.cinemas.includes(s.c))return false;
     if(S.tab==="now"){
       if(S.days.length&&!S.days.includes(wd(s.d)))return false;
       if(S.after&&s.t<S.after)return false;
@@ -238,7 +255,7 @@ function visible(f){
   if(S.q){const q=S.q.toLowerCase();
     if(!(f.title.toLowerCase().includes(q)||(f.actors||[]).some(a=>a.toLowerCase().includes(q))))return false;}
   if(S.tab==="now"){ if(!showsFor(f).length)return false; }
-  else if(S.cinema&&!(f.links||{})[S.cinema])return false;
+  else if(!(f.soonAt||[]).some(c=>S.cinemas.includes(c)))return false;
   return true;
 }
 function firstShow(f){const s=showsFor(f)[0];return s?s.d+s.t:"9999";}
@@ -279,18 +296,25 @@ function card(f){
   const cast=(f.actors||[]).length?`<p class="cast"><span>Starring</span> ${esc(f.actors.join(", "))}</p>`:"";
   const syn=f.synopsis?`<details class="syn"><summary><span class="txt">${esc(f.synopsis)}</span><span class="chev" aria-hidden="true">▼</span></summary></details>`:"";
   const links=[`<a href="${imdbUrl}" target="_blank" rel="noopener">▶ IMDb &amp; trailer ↗</a>`];
-  for(const [cid,url] of Object.entries(f.links||{}))links.push(`<a href="${esc(url)}" target="_blank" rel="noopener">${esc((CIN[cid]||{}).name||"Cinema")} ↗</a>`);
+  for(const [cid,url] of Object.entries(f.links||{}))if(S.cinemas.includes(cid))links.push(`<a href="${esc(url)}" target="_blank" rel="noopener">${esc((CIN[cid]||{}).name||"Cinema")} ↗</a>`);
   let tail="";
   const sh=showsFor(f);
+  const timeA=x=>`<a class="time${x.sold?" sold":""}" href="${esc(x.u||f.links[x.c]||"#")}" target="_blank" rel="noopener" title="${x.sold?"Sold out":"Book at "+esc((CIN[x.c]||{}).name||"")}">${x.t}${x.tags.length?` <i>${esc(x.tags.join(" · "))}</i>`:""}</a>`;
+  const dayRows=(ss,withName)=>{
+    const byDay={};ss.forEach(x=>(byDay[x.d]=byDay[x.d]||[]).push(x));
+    return Object.entries(byDay).map(([d,xs])=>`<div class="dayrow"><span class="dayname">${fmtDay(d)}</span><span class="times">${xs.map(timeA).join("")}</span></div>`).join("");
+  };
   if(sh.length){
-    const byDay={};sh.forEach(s=>(byDay[s.d]=byDay[s.d]||[]).push(s));
-    tail=`<div class="shows">`+Object.entries(byDay).map(([d,ss])=>
-      `<div class="dayrow"><span class="dayname">${fmtDay(d)}</span><span class="times">`+
-      ss.map(s=>`<a class="time${s.sold?" sold":""}" href="${esc(f.links[s.c]||"#")}" target="_blank" rel="noopener" title="${s.sold?"Sold out":"Book at "+esc((CIN[s.c]||{}).name||"")}">${s.t}${s.tags.length?` <i>${esc(s.tags.join(" · "))}</i>`:""}</a>`).join("")+
-      `</span></div>`).join("")+`</div>`;
+    const cins=[...new Set(sh.map(x=>x.c))];
+    if(cins.length<=1&&S.cinemas.length<=1){
+      tail=`<div class="shows">${dayRows(sh)}</div>`;
+    }else{
+      tail=`<div class="shows">`+DATA.cinemas.filter(c=>cins.includes(c.id)).map(c=>
+        `<div class="venue"><a class="vname c${cinIdx(c.id)}" href="${esc(f.links[c.id]||c.url)}" target="_blank" rel="noopener">${esc(c.name)} ↗</a>${dayRows(sh.filter(x=>x.c===c.id))}</div>`).join("")+`</div>`;
+    }
   } else if(S.tab==="soon"){
-    const bf=Object.entries(f.bookingFrom||{});
-    tail=`<div class="booking">`+(bf.length?bf.map(([c,d])=>`Tickets on sale at ${esc((CIN[c]||{}).name||c)} · first screening ${fmtDate(d)}`).join("<br>"):"Brighton times not announced yet")+`</div>`;
+    const bf=Object.entries(f.bookingFrom||{}).filter(([c])=>S.cinemas.includes(c));
+    tail=`<div class="booking">`+(bf.length?bf.map(([c,d])=>`${esc((CIN[c]||{}).name||c)} · first screening ${fmtDate(d)}`).join("<br>"):"Brighton times not announced yet")+`</div>`;
   }
   const certTitle=f.certNote?`${f.cert}: ${f.certNote}`:(f.cert==="TBC"?"Certificate not yet announced":f.cert);
   return `<article class="film"><div class="ftop"><h2 class="ftitle">${esc(f.title)}</h2><span class="cert c-${esc(f.cert)}" title="${esc(certTitle)}">${esc(f.cert)}</span></div>`+
@@ -306,12 +330,16 @@ function renderControls(){
     const on=v==="any"?!S.days.length:v==="wkd"?(S.days.length===2&&S.days.includes("sat")&&S.days.includes("sun")):S.days.includes(v);
     c.setAttribute("aria-pressed",String(on));
   });
+  document.querySelectorAll("#cinrow .chip").forEach(c=>{
+    const all=DATA.cinemas.map(x=>x.id);
+    c.setAttribute("aria-pressed",String(c.dataset.k==="all"?sameSet(S.cinemas,all):S.cinemas.includes(c.dataset.k)));
+  });
   document.querySelectorAll("#certchips .chip").forEach(c=>c.setAttribute("aria-pressed",String(c.dataset.c===S.cert)));
   $("sort").innerHTML=SORTS[S.tab].map(([v,l])=>`<option value="${v}"${v===S.sort?" selected":""}>${l}</option>`).join("");
   $("dir").textContent=S.dir==="desc"?"↓ High → low":"↑ Low → high";
   if(S.sort==="title")$("dir").textContent=S.dir==="desc"?"↓ Z → A":"↑ A → Z";
   if(S.sort==="time"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
-  $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;$("cinema").value=S.cinema;
+  $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;
   if(document.activeElement!==$("q"))$("q").value=S.q;
   renderSummary();
 }
@@ -323,7 +351,7 @@ function renderSummary(){
   if(S.cert)parts.push(S.cert==="U"?"U only":S.cert+" & under");
   if(S.min)parts.push("IMDb "+S.min+"+");
   if(S.series)parts.push(S.series==="yes"?"Part of a series":"Stand-alone");
-  if(S.cinema)parts.push((CIN[S.cinema]||{}).name||S.cinema);
+  if(!sameSet(S.cinemas,defaultCinemas()))parts.push(sameSet(S.cinemas,DATA.cinemas.map(c=>c.id))?"All cinemas":S.cinemas.map(c=>(CIN[c]||{}).name||c).join(" + "));
   if(S.q)parts.push("“"+S.q+"”");
   $("nact").textContent=parts.length||"";
   const sl=(SORTS[S.tab].find(x=>x[0]===S.sort)||[])[1]||S.sort;
@@ -336,6 +364,11 @@ function setOpen(o){
 }
 function render(){
   writeURL();renderControls();
+  const single=S.cinemas.length===1?(CIN[S.cinemas[0]]||{}).name:"Brighton & Lewes";
+  $("h1").textContent="What's on — "+single;document.title="CinemaBrain — "+single;
+  const inSel=f=>f.nowShowing&&f.shows.some(x=>S.cinemas.includes(x.c));
+  $("n-now").textContent=DATA.films.filter(inSel).length;
+  $("n-soon").textContent=DATA.films.filter(f=>(f.soonAt||[]).some(c=>S.cinemas.includes(c))).length;
   const list=DATA.films.filter(visible).sort(cmp);
   const shows=S.tab==="now"?list.reduce((n,f)=>n+showsFor(f).length,0):0;
   const bits=[list.length+(list.length===1?" film":" films")];
@@ -352,14 +385,21 @@ function build(){
   CIN=Object.fromEntries(DATA.cinemas.map(c=>[c.id,c]));
   const gen=new Date(DATA.generated);
   $("sub").textContent=`Updated ${gen.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}, ${gen.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})} · showtimes ${fmtDate(DATA.dates[0])} – ${fmtDate(DATA.dates[DATA.dates.length-1])}`;
-  $("n-now").textContent=DATA.films.filter(f=>f.nowShowing).length;
-  $("n-soon").textContent=DATA.films.filter(f=>f.comingSoon).length;
+  const w=Object.keys(DATA.errors||{});
+  if(w.length){$("warn").hidden=false;$("warn").textContent="Couldn't update this week: "+w.map(c=>(CIN[c]||{}).name||c).join(", ")+" (showing no listings for "+(w.length>1?"them":"it")+").";}
+  if(DATA.cinemas.length>1){
+    $("cinrow").hidden=false;
+    $("cinrow").insertAdjacentHTML("beforeend",DATA.cinemas.map(c=>`<button class="chip" data-k="${c.id}">${esc(c.name)}</button>`).join("")+`<button class="chip" data-k="all">All</button>`);
+    $("cinrow").addEventListener("click",e=>{const b=e.target.closest(".chip");if(!b)return;const k=b.dataset.k,all=DATA.cinemas.map(c=>c.id);
+      if(k==="all")S.cinemas=sameSet(S.cinemas,all)?defaultCinemas():all;
+      else{S.cinemas=S.cinemas.includes(k)?S.cinemas.filter(x=>x!==k):[...S.cinemas,k];if(!S.cinemas.length)S.cinemas=defaultCinemas();}
+      S.cinemas.sort((a,b)=>all.indexOf(a)-all.indexOf(b));render();});
+  }
   const dr=$("dayrow");
   dr.insertAdjacentHTML("beforeend",`<button class="chip" data-d="any">Any</button>`+
     DATA.dates.map(d=>`<button class="chip" data-d="${wd(d)}">${fmtDay(d)}</button>`).join("")+
     `<button class="chip" data-d="wkd">Weekend</button>`);
   $("certchips").innerHTML=`<button class="chip" data-c="">Any</button>`+CERTS.slice(0,4).map(c=>`<button class="chip" data-c="${c}">${c==="U"?"U only":c+" & under"}</button>`).join("");
-  if(DATA.cinemas.length>1){$("cinema").hidden=false;$("cinema").innerHTML=`<option value="">All cinemas</option>`+DATA.cinemas.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");}
 
   document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t||t.dataset.tab===S.tab)return;
     S.tab=t.dataset.tab;[S.sort,S.dir]=DEF_SORT[S.tab];render();});
@@ -372,7 +412,7 @@ function build(){
   $("sort").addEventListener("change",e=>{S.sort=e.target.value;S.dir=DEF_DIR[S.sort];render();});
   $("dir").addEventListener("click",()=>{S.dir=S.dir==="desc"?"asc":"desc";render();});
   let qt;$("q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{S.q=e.target.value.trim();render();},150);});
-  for(const id of ["after","before","min","series","cinema"])$(id).addEventListener("change",e=>{S[id]=e.target.value;render();});
+  for(const id of ["after","before","min","series"])$(id).addEventListener("change",e=>{S[id]=e.target.value;render();});
   $("toggle").addEventListener("click",()=>setOpen(!$("controls").classList.contains("open")));
   $("done").addEventListener("click",()=>{setOpen(false);window.scrollTo({top:0});});
   $("reset").addEventListener("click",resetAll);
