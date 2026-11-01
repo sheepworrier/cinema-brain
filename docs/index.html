@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CinemaBrain — What's on in Brighton</title>
+<meta name="description" content="Films showing this week at ODEON Brighton, with IMDb ratings, filters and shareable links.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+<style>
+:root{
+  --bg:#f6f5f2; --card:#fff; --ink:#1a1a1a; --muted:#6a6a6a; --line:#e3e0da;
+  --accent:#8a1c2b; --chip:#f0eeea; --shadow:0 1px 2px rgba(0,0,0,.06),0 4px 14px rgba(0,0,0,.04);
+  --ode:#1d4ed8; --series:#5b21b6;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#141414;--card:#1e1e1e;--ink:#eceae6;--muted:#9d9a94;--line:#333;
+        --accent:#e88a96;--chip:#2a2a2a;--shadow:none;--ode:#8fb2ff;--series:#c4b5fd;}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;-webkit-text-size-adjust:100%}
+a{color:inherit}
+.wrap{max-width:900px;margin:0 auto;padding:20px 16px 60px}
+h1{font-size:22px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:0}
+.tab{font:inherit;font-size:15px;font-weight:600;padding:9px 14px;border:0;background:none;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
+.tab .n{font-weight:500;font-size:12.5px;color:var(--muted);margin-left:4px}
+.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.row+.row{margin-top:8px}
+.lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);min-width:52px}
+select,input[type=search]{font:inherit;font-size:14px;padding:6px 9px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);max-width:100%}
+input[type=search]{flex:1;min-width:140px}
+.chip,.btn{font:inherit;font-size:13px;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--muted);cursor:pointer;white-space:nowrap}
+.chip[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+@media (prefers-color-scheme:dark){.chip[aria-pressed=true]{color:#1a1a1a}}
+.btn{color:var(--ink)}
+.btn.primary{border-color:var(--accent);color:var(--accent);font-weight:600}
+.more-filters{display:none}
+.controls.open .more-filters{display:block}
+.toggle-more{margin-left:auto}
+.count{font-size:13px;color:var(--muted);margin:0 0 14px}
+.film{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.ftop{display:flex;gap:10px;align-items:baseline}
+.ftitle{font-size:17px;font-weight:650;letter-spacing:-.01em;margin:0;flex:1}
+.cert{font-size:11px;font-weight:700;letter-spacing:.04em;padding:2px 7px;border-radius:5px;border:1.5px solid currentColor;line-height:1.4;flex-shrink:0;cursor:help}
+.c-U,.c-PG{color:#15803d}.c-12A{color:#b45309}.c-15{color:#b91c1c}.c-18{color:#7f1d1d}.c-TBC{color:var(--muted)}
+@media (prefers-color-scheme:dark){.c-U,.c-PG{color:#6ee7a8}.c-12A{color:#f0b25c}.c-15{color:#f88b8b}.c-18{color:#f4a3a3}}
+.meta{font-size:13px;color:var(--muted);margin:5px 0 0;display:flex;gap:4px 12px;flex-wrap:wrap}
+.star{color:var(--accent);font-weight:700}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.badge{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--muted);text-decoration:none}
+.badge.series{color:var(--series);border:1px solid currentColor;background:none}
+a.badge:hover{text-decoration:underline}
+.cast{font-size:13.5px;margin:8px 0 0;color:var(--ink)}
+.cast span{color:var(--muted)}
+details.syn{margin:6px 0 0;font-size:14.5px}
+details.syn summary{cursor:pointer;list-style:none;display:flex;gap:6px;align-items:flex-start}
+details.syn summary::-webkit-details-marker{display:none}
+details.syn summary .txt{flex:1}
+details.syn:not([open]) summary .txt{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+details.syn summary .chev{color:var(--muted);font-size:12px;transition:transform .15s;margin-top:3px}
+details.syn[open] summary .chev{transform:rotate(180deg)}
+.links{display:flex;gap:14px;flex-wrap:wrap;margin-top:9px;font-size:13.5px;font-weight:600}
+.links a{color:var(--accent);text-decoration:none}
+.links a:hover{text-decoration:underline}
+.shows{margin-top:11px;border-top:1px solid var(--line);padding-top:10px;display:grid;gap:7px}
+.dayrow{display:flex;gap:9px;align-items:baseline}
+.dayname{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ode);min-width:58px;flex-shrink:0}
+.times{display:flex;gap:5px;flex-wrap:wrap}
+.time{font-size:13px;font-variant-numeric:tabular-nums;background:var(--chip);border-radius:6px;padding:3px 7px;white-space:nowrap;text-decoration:none}
+a.time:hover{outline:1px solid var(--accent)}
+.time i{font-style:normal;font-size:10px;color:var(--muted);margin-left:3px;letter-spacing:.03em}
+.time.sold{text-decoration:line-through;opacity:.5}
+.booking{font-size:13px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
+.empty{text-align:center;color:var(--muted);padding:40px 10px}
+footer{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer p{margin:0 0 8px}
+footer a{color:var(--accent)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:8px 14px;border-radius:8px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>What's on — ODEON Brighton</h1>
+<p class="sub" id="sub">Loading…</p>
+
+<div class="tabs" role="tablist">
+  <button class="tab" role="tab" data-tab="now" aria-selected="true">Now showing<span class="n" id="n-now"></span></button>
+  <button class="tab" role="tab" data-tab="soon" aria-selected="false">Coming soon<span class="n" id="n-soon"></span></button>
+</div>
+
+<div class="controls" id="controls">
+  <div class="row now-only" id="dayrow"><span class="lbl">Day</span></div>
+  <div class="row">
+    <span class="lbl">Rated</span>
+    <span id="certchips" class="row" style="gap:6px"></span>
+  </div>
+  <div class="row">
+    <span class="lbl">Sort</span>
+    <select id="sort" aria-label="Sort by"></select>
+    <button class="btn" id="dir" aria-label="Sort direction"></button>
+    <input type="search" id="q" placeholder="Search title or actor…" aria-label="Search">
+  </div>
+  <div class="more-filters">
+    <div class="row now-only">
+      <span class="lbl">Time</span>
+      <select id="after" aria-label="Starting at or after">
+        <option value="">Any time</option>
+        <option value="12:00">From 12:00</option><option value="15:00">From 15:00</option>
+        <option value="17:00">From 17:00</option><option value="18:00">From 18:00</option>
+        <option value="19:00">From 19:00</option><option value="20:00">From 20:00</option>
+      </select>
+      <select id="before" aria-label="Starting before">
+        <option value="">until close</option>
+        <option value="12:00">before 12:00</option><option value="15:00">before 15:00</option>
+        <option value="17:00">before 17:00</option><option value="19:00">before 19:00</option>
+        <option value="21:00">before 21:00</option>
+      </select>
+    </div>
+    <div class="row">
+      <span class="lbl">IMDb</span>
+      <select id="min" aria-label="Minimum IMDb rating">
+        <option value="">Any rating</option><option value="6">6.0+</option><option value="6.5">6.5+</option>
+        <option value="7">7.0+</option><option value="7.5">7.5+</option><option value="8">8.0+</option>
+      </select>
+      <span class="lbl" style="min-width:auto;margin-left:8px">Series</span>
+      <select id="series" aria-label="Part of a series">
+        <option value="">Any</option><option value="yes">Part of a series</option><option value="no">Stand-alone only</option>
+      </select>
+      <select id="cinema" aria-label="Cinema" hidden></select>
+    </div>
+  </div>
+  <div class="row">
+    <button class="btn" id="more">More filters ▾</button>
+    <button class="btn" id="reset">Reset</button>
+    <button class="btn primary toggle-more" id="share">🔗 Copy link</button>
+  </div>
+</div>
+
+<p class="count" id="count"></p>
+<div id="list"></div>
+
+<footer>
+  <p>Listings from <a href="https://www.odeon.co.uk/cinemas/brighton/">ODEON Brighton</a>'s booking system. Ratings and votes from IMDb's public dataset. Cast and series info from <a href="https://www.themoviedb.org/">TMDB</a> (this product uses the TMDB API but is not endorsed or certified by TMDB). Click a showtime to book. Times can change, so check before you travel.</p>
+  <p>Your filters and sort are saved in the page address. Bookmark it, or use <b>Copy link</b> to share exactly this view.</p>
+</footer>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+const CERTS=["U","PG","12A","15","18"];
+const CERTORD={U:0,PG:1,"12A":2,"15":3,"18":4,TBC:9};
+const WD=["sun","mon","tue","wed","thu","fri","sat"];
+const SORTS={
+  now:[["imdb","IMDb rating"],["votes","IMDb votes"],["title","Title"],["time","Earliest showtime"],["cert","Certificate"],["runtime","Running time"],["release","Release date"]],
+  soon:[["release","Release date"],["imdb","IMDb rating"],["votes","IMDb votes"],["title","Title"],["cert","Certificate"]]
+};
+const DEF_SORT={now:["imdb","desc"],soon:["release","asc"]};
+const DEF_DIR={imdb:"desc",votes:"desc",title:"asc",time:"asc",cert:"asc",runtime:"asc",release:"asc"};
+let DATA=null, CIN={};
+const S={}; // current state
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pd=s=>{const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d);};
+const fmtDay=s=>pd(s).toLocaleDateString("en-GB",{weekday:"short",day:"numeric"});
+const fmtDate=s=>pd(s).toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"});
+const wd=s=>WD[pd(s).getDay()];
+const fmtVotes=v=>v>=1e6?(v/1e6).toFixed(1).replace(/\.0$/,"")+"M":v>=1e3?Math.round(v/1e3)+"k":String(v);
+const sortTitle=t=>t.replace(/^(the|a|an) /i,"").toLowerCase();
+
+// ---------- URL state ----------
+function readURL(){
+  const p=new URLSearchParams(location.search);
+  S.tab=p.get("tab")==="soon"?"soon":"now";
+  S.days=(p.get("days")||"").split(",").filter(d=>WD.includes(d));
+  S.after=p.get("after")||""; S.before=p.get("before")||"";
+  S.cert=CERTS.includes(p.get("cert"))?p.get("cert"):"";
+  S.series=["yes","no"].includes(p.get("series"))?p.get("series"):"";
+  S.min=p.get("min")||""; S.q=p.get("q")||""; S.cinema=p.get("cinema")||"";
+  const valid=SORTS[S.tab].map(x=>x[0]);
+  S.sort=valid.includes(p.get("sort"))?p.get("sort"):DEF_SORT[S.tab][0];
+  S.dir=["asc","desc"].includes(p.get("dir"))?p.get("dir"):(p.get("sort")?DEF_DIR[S.sort]:DEF_SORT[S.tab][1]);
+}
+function writeURL(){
+  const p=new URLSearchParams();
+  if(S.tab!=="now")p.set("tab",S.tab);
+  if(S.tab==="now"){
+    if(S.days.length)p.set("days",S.days.join(","));
+    if(S.after)p.set("after",S.after);
+    if(S.before)p.set("before",S.before);
+  }
+  if(S.cert)p.set("cert",S.cert);
+  if(S.series)p.set("series",S.series);
+  if(S.min)p.set("min",S.min);
+  if(S.cinema)p.set("cinema",S.cinema);
+  if(S.q)p.set("q",S.q);
+  const [ds,dd]=DEF_SORT[S.tab];
+  if(S.sort!==ds||S.dir!==dd){p.set("sort",S.sort);if(S.dir!==DEF_DIR[S.sort])p.set("dir",S.dir);}
+  const qs=p.toString().replace(/%2C/g,",").replace(/%3A/g,":");
+  history.replaceState(null,"",location.pathname+(qs?"?"+qs:""));
+}
+
+// ---------- filtering ----------
+function showsFor(f){
+  return f.shows.filter(s=>{
+    if(S.cinema&&s.c!==S.cinema)return false;
+    if(S.tab==="now"){
+      if(S.days.length&&!S.days.includes(wd(s.d)))return false;
+      if(S.after&&s.t<S.after)return false;
+      if(S.before&&s.t>=S.before)return false;
+    }
+    return true;
+  });
+}
+function visible(f){
+  if(S.tab==="now"&&!f.nowShowing)return false;
+  if(S.tab==="soon"&&!f.comingSoon)return false;
+  // Unrated (TBC) films stay visible on Coming soon - the certificate usually arrives near release
+  if(S.cert&&!(CERTORD[f.cert]<=CERTORD[S.cert])&&!(S.tab==="soon"&&f.cert==="TBC"))return false;
+  if(S.series==="yes"&&!f.series)return false;
+  if(S.series==="no"&&f.series)return false;
+  if(S.min&&!((f.imdb||{}).rating>=+S.min))return false;
+  if(S.q){const q=S.q.toLowerCase();
+    if(!(f.title.toLowerCase().includes(q)||(f.actors||[]).some(a=>a.toLowerCase().includes(q))))return false;}
+  if(S.tab==="now"){ if(!showsFor(f).length)return false; }
+  else if(S.cinema&&!(f.links||{})[S.cinema])return false;
+  return true;
+}
+function firstShow(f){const s=showsFor(f)[0];return s?s.d+s.t:"9999";}
+function cmp(a,b){
+  const r=x=>(x.imdb||{}).rating, v=x=>(x.imdb||{}).votes;
+  const nulls=(x,y,desc)=>x==null&&y==null?0:x==null?1:y==null?-1:(desc?y-x:x-y);
+  const d=S.dir==="desc";
+  let c=0;
+  switch(S.sort){
+    case "imdb":c=nulls(r(a),r(b),d)||nulls(v(a),v(b),true);break;
+    case "votes":c=nulls(v(a),v(b),d);break;
+    case "runtime":c=nulls(a.runtime,b.runtime,d);break;
+    case "cert":c=(CERTORD[a.cert]-CERTORD[b.cert])*(d?-1:1);break;
+    case "time":c=firstShow(a).localeCompare(firstShow(b))*(d?-1:1);break;
+    case "release":c=(a.release||"9").localeCompare(b.release||"9")*(d?-1:1);break;
+    case "title":c=sortTitle(a.title).localeCompare(sortTitle(b.title))*(d?-1:1);break;
+  }
+  return c||sortTitle(a.title).localeCompare(sortTitle(b.title));
+}
+
+// ---------- rendering ----------
+function card(f){
+  const im=f.imdb||{};
+  const imdbUrl=im.id?`https://www.imdb.com/title/${im.id}/`:`https://www.imdb.com/find/?q=${encodeURIComponent(f.title)}&s=tt`;
+  const meta=[];
+  meta.push(im.rating?`<span><span class="star">★ ${im.rating.toFixed(1)}</span> IMDb · ${fmtVotes(im.votes)} votes</span>`:`<span>No IMDb rating yet</span>`);
+  if(f.runtime)meta.push(`<span>${f.runtime} min</span>`);
+  if(f.genres&&f.genres.length)meta.push(`<span>${esc(f.genres.join(" · "))}</span>`);
+  if(f.release){
+    const rel=pd(f.release), today=pd(DATA.dates[0]);
+    if(S.tab==="soon"||rel>today)meta.push(`<span>Released ${fmtDate(f.release)}</span>`);
+  }
+  const badges=[];
+  if(f.series)badges.push(`<a class="badge series" href="${esc(f.series.url)}" target="_blank" rel="noopener" title="See the whole series on TMDB">Part of a series: ${esc(f.series.name.replace(/ Collection$/,""))} ↗</a>`);
+  if(f.rerelease)badges.push(`<span class="badge">Re-release</span>`);
+  if(f.isEvent)badges.push(`<span class="badge">Event</span>`);
+  if(f.release&&f.release>DATA.dates[0]&&f.release<=DATA.dates[DATA.dates.length-1]&&S.tab==="now")badges.push(`<span class="badge">New this week</span>`);
+  const cast=(f.actors||[]).length?`<p class="cast"><span>Starring</span> ${esc(f.actors.join(", "))}</p>`:"";
+  const syn=f.synopsis?`<details class="syn"><summary><span class="txt">${esc(f.synopsis)}</span><span class="chev" aria-hidden="true">▼</span></summary></details>`:"";
+  const links=[`<a href="${imdbUrl}" target="_blank" rel="noopener">▶ IMDb &amp; trailer ↗</a>`];
+  for(const [cid,url] of Object.entries(f.links||{}))links.push(`<a href="${esc(url)}" target="_blank" rel="noopener">${esc((CIN[cid]||{}).name||"Cinema")} ↗</a>`);
+  let tail="";
+  const sh=showsFor(f);
+  if(sh.length){
+    const byDay={};sh.forEach(s=>(byDay[s.d]=byDay[s.d]||[]).push(s));
+    tail=`<div class="shows">`+Object.entries(byDay).map(([d,ss])=>
+      `<div class="dayrow"><span class="dayname">${fmtDay(d)}</span><span class="times">`+
+      ss.map(s=>`<a class="time${s.sold?" sold":""}" href="${esc(f.links[s.c]||"#")}" target="_blank" rel="noopener" title="${s.sold?"Sold out":"Book at "+esc((CIN[s.c]||{}).name||"")}">${s.t}${s.tags.length?` <i>${esc(s.tags.join(" · "))}</i>`:""}</a>`).join("")+
+      `</span></div>`).join("")+`</div>`;
+  } else if(S.tab==="soon"){
+    const bf=Object.entries(f.bookingFrom||{});
+    tail=`<div class="booking">`+(bf.length?bf.map(([c,d])=>`Tickets on sale at ${esc((CIN[c]||{}).name||c)} · first screening ${fmtDate(d)}`).join("<br>"):"Brighton times not announced yet")+`</div>`;
+  }
+  const certTitle=f.certNote?`${f.cert}: ${f.certNote}`:(f.cert==="TBC"?"Certificate not yet announced":f.cert);
+  return `<article class="film"><div class="ftop"><h2 class="ftitle">${esc(f.title)}</h2><span class="cert c-${esc(f.cert)}" title="${esc(certTitle)}">${esc(f.cert)}</span></div>`+
+    `<p class="meta">${meta.join("")}</p>`+(badges.length?`<div class="badges">${badges.join("")}</div>`:"")+cast+syn+
+    `<div class="links">${links.join("")}</div>${tail}</article>`;
+}
+
+function renderControls(){
+  document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",String(t.dataset.tab===S.tab)));
+  document.querySelectorAll(".now-only").forEach(e=>e.style.display=S.tab==="now"?"":"none");
+  document.querySelectorAll("#dayrow .chip").forEach(c=>{
+    const v=c.dataset.d;
+    const on=v==="any"?!S.days.length:v==="wkd"?(S.days.length===2&&S.days.includes("sat")&&S.days.includes("sun")):S.days.includes(v);
+    c.setAttribute("aria-pressed",String(on));
+  });
+  document.querySelectorAll("#certchips .chip").forEach(c=>c.setAttribute("aria-pressed",String(c.dataset.c===S.cert)));
+  $("sort").innerHTML=SORTS[S.tab].map(([v,l])=>`<option value="${v}"${v===S.sort?" selected":""}>${l}</option>`).join("");
+  $("dir").textContent=S.dir==="desc"?"↓ High → low":"↑ Low → high";
+  if(S.sort==="title")$("dir").textContent=S.dir==="desc"?"↓ Z → A":"↑ A → Z";
+  if(S.sort==="time"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
+  $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;$("cinema").value=S.cinema;
+  if(document.activeElement!==$("q"))$("q").value=S.q;
+  const extra=S.tab==="now"&&(S.after||S.before)||S.min||S.series||S.cinema;
+  if(extra)$("controls").classList.add("open");
+  $("more").textContent=$("controls").classList.contains("open")?"Fewer filters ▴":"More filters ▾";
+}
+function render(){
+  writeURL();renderControls();
+  const list=DATA.films.filter(visible).sort(cmp);
+  const shows=S.tab==="now"?list.reduce((n,f)=>n+showsFor(f).length,0):0;
+  const bits=[list.length+(list.length===1?" film":" films")];
+  if(S.tab==="now"){bits.push(shows+" showings");
+    bits.push(S.days.length?S.days.map(d=>{const ds=DATA.dates.find(x=>wd(x)===d);return ds?fmtDay(ds):d;}).join(", "):"next 7 days");}
+  else bits.push("released by "+fmtDate(DATA.soonUntil));
+  if(S.cert)bits.push(S.cert+" and under");
+  $("count").textContent=bits.join(" · ");
+  $("list").innerHTML=list.length?list.map(card).join(""):`<p class="empty">Nothing matches those filters. <button class="btn" onclick="resetAll()">Reset filters</button></p>`;
+}
+function resetAll(){const t=S.tab;history.replaceState(null,"",location.pathname+(t==="soon"?"?tab=soon":""));readURL();render();}
+
+function build(){
+  CIN=Object.fromEntries(DATA.cinemas.map(c=>[c.id,c]));
+  const gen=new Date(DATA.generated);
+  $("sub").textContent=`Updated ${gen.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short"})}, ${gen.toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})} · showtimes ${fmtDate(DATA.dates[0])} – ${fmtDate(DATA.dates[DATA.dates.length-1])}`;
+  $("n-now").textContent=DATA.films.filter(f=>f.nowShowing).length;
+  $("n-soon").textContent=DATA.films.filter(f=>f.comingSoon).length;
+  const dr=$("dayrow");
+  dr.insertAdjacentHTML("beforeend",`<button class="chip" data-d="any">Any</button>`+
+    DATA.dates.map(d=>`<button class="chip" data-d="${wd(d)}">${fmtDay(d)}</button>`).join("")+
+    `<button class="chip" data-d="wkd">Weekend</button>`);
+  $("certchips").innerHTML=`<button class="chip" data-c="">Any</button>`+CERTS.slice(0,4).map(c=>`<button class="chip" data-c="${c}">${c==="U"?"U only":c+" & under"}</button>`).join("");
+  if(DATA.cinemas.length>1){$("cinema").hidden=false;$("cinema").innerHTML=`<option value="">All cinemas</option>`+DATA.cinemas.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("");}
+
+  document.querySelector(".tabs").addEventListener("click",e=>{const t=e.target.closest(".tab");if(!t||t.dataset.tab===S.tab)return;
+    S.tab=t.dataset.tab;[S.sort,S.dir]=DEF_SORT[S.tab];render();});
+  dr.addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;const v=c.dataset.d;
+    if(v==="any")S.days=[];
+    else if(v==="wkd")S.days=(S.days.length===2&&S.days.includes("sat")&&S.days.includes("sun"))?[]:["sat","sun"];
+    else S.days=S.days.includes(v)?S.days.filter(x=>x!==v):[...S.days,v];
+    const order=DATA.dates.map(wd);S.days.sort((a,b)=>order.indexOf(a)-order.indexOf(b));render();});
+  $("certchips").addEventListener("click",e=>{const c=e.target.closest(".chip");if(!c)return;S.cert=c.dataset.c;render();});
+  $("sort").addEventListener("change",e=>{S.sort=e.target.value;S.dir=DEF_DIR[S.sort];render();});
+  $("dir").addEventListener("click",()=>{S.dir=S.dir==="desc"?"asc":"desc";render();});
+  let qt;$("q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{S.q=e.target.value.trim();render();},150);});
+  for(const id of ["after","before","min","series","cinema"])$(id).addEventListener("change",e=>{S[id]=e.target.value;render();});
+  $("more").addEventListener("click",()=>{$("controls").classList.toggle("open");renderControls();});
+  $("reset").addEventListener("click",resetAll);
+  $("share").addEventListener("click",async()=>{
+    const url=location.href;
+    try{ if(navigator.share&&matchMedia("(pointer:coarse)").matches){await navigator.share({title:document.title,url});return;}
+         await navigator.clipboard.writeText(url);toast("Link copied: send it to share this exact view");}
+    catch(_){prompt("Copy this link:",url);}
+  });
+  readURL();render();
+}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200);}
+
+fetch("data.json",{cache:"no-cache"}).then(r=>r.json()).then(d=>{DATA=d;build();})
+  .catch(e=>{$("sub").textContent="Couldn't load listings ("+e.message+").";});
+</script>
+</body>
+</html>
