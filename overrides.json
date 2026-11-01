@@ -7,13 +7,6 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andrew%20Lloyd%20Webber%E2%80%99s%20Starlight%20Express",
     "suggestions": []
   },
-  "CBeebies Panto 2026: Treasure Island": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/cbeebies-panto-2026-treasure-island/HO00009679/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=CBeebies%20Panto%202026%3A%20Treasure%20Island",
-    "suggestions": []
-  },
   "Doctor Who: The Satan Pit": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
@@ -157,5 +150,12 @@
       "13396 = The Snowman (1982) https://www.themoviedb.org/movie/13396",
       "777401 = The Snowman (1901) https://www.themoviedb.org/movie/777401"
     ]
+  },
+  "CBeebies Panto 2026: Treasure Island": {
+    "tmdb_id": 1785679,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/cbeebies-panto-2026-treasure-island/HO00009679/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=CBeebies%20Panto%202026%3A%20Treasure%20Island",
+    "suggestions": []
   }
 }

@@ -27,7 +27,17 @@ h1{font-size:22px;line-height:1.25;margin:0 0 4px;letter-spacing:-.01em}
 .tab{font:inherit;font-size:15px;font-weight:600;padding:9px 14px;border:0;background:none;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
 .tab[aria-selected=true]{color:var(--ink);border-bottom-color:var(--accent)}
 .tab .n{font-weight:500;font-size:12.5px;color:var(--muted);margin-left:4px}
-.controls{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 12px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.controls{background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line);margin-bottom:12px}
+.controls:not(.open){position:sticky;top:0;z-index:5}
+.bar{display:flex;gap:8px;align-items:center}
+.bar #toggle{flex-shrink:0}
+.nact{display:inline-block;min-width:18px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font-size:11.5px;font-weight:700;text-align:center;margin-left:3px}
+.nact:empty{display:none}
+@media (prefers-color-scheme:dark){.nact{color:#1a1a1a}}
+.summ{flex:1;min-width:0;font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.controls.open .summ{visibility:hidden}
+.panel{display:none;padding-top:10px}
+.controls.open .panel{display:block}
 .row{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
 .row+.row{margin-top:8px}
 .lbl{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);min-width:52px}
@@ -38,9 +48,6 @@ input[type=search]{flex:1;min-width:140px}
 @media (prefers-color-scheme:dark){.chip[aria-pressed=true]{color:#1a1a1a}}
 .btn{color:var(--ink)}
 .btn.primary{border-color:var(--accent);color:var(--accent);font-weight:600}
-.more-filters{display:none}
-.controls.open .more-filters{display:block}
-.toggle-more{margin-left:auto}
 .count{font-size:13px;color:var(--muted);margin:0 0 14px}
 .film{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .ftop{display:flex;gap:10px;align-items:baseline}
@@ -94,6 +101,12 @@ footer a{color:var(--accent)}
 </div>
 
 <div class="controls" id="controls">
+  <div class="bar">
+    <button class="btn" id="toggle" aria-expanded="false" aria-controls="panel">Filters &amp; sort <span class="nact" id="nact"></span> <span id="tchev">▾</span></button>
+    <span class="summ" id="summ"></span>
+    <button class="btn primary" id="share">🔗 Copy link</button>
+  </div>
+  <div class="panel" id="panel">
   <div class="row now-only" id="dayrow"><span class="lbl">Day</span></div>
   <div class="row">
     <span class="lbl">Rated</span>
@@ -105,7 +118,6 @@ footer a{color:var(--accent)}
     <button class="btn" id="dir" aria-label="Sort direction"></button>
     <input type="search" id="q" placeholder="Search title or actor…" aria-label="Search">
   </div>
-  <div class="more-filters">
     <div class="row now-only">
       <span class="lbl">Time</span>
       <select id="after" aria-label="Starting at or after">
@@ -133,11 +145,10 @@ footer a{color:var(--accent)}
       </select>
       <select id="cinema" aria-label="Cinema" hidden></select>
     </div>
-  </div>
   <div class="row">
-    <button class="btn" id="more">More filters ▾</button>
-    <button class="btn" id="reset">Reset</button>
-    <button class="btn primary toggle-more" id="share">🔗 Copy link</button>
+    <button class="btn" id="reset">Reset all filters</button>
+    <button class="btn" id="done">Done ▴</button>
+  </div>
   </div>
 </div>
 
@@ -302,9 +313,26 @@ function renderControls(){
   if(S.sort==="time"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
   $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;$("cinema").value=S.cinema;
   if(document.activeElement!==$("q"))$("q").value=S.q;
-  const extra=S.tab==="now"&&(S.after||S.before)||S.min||S.series||S.cinema;
-  if(extra)$("controls").classList.add("open");
-  $("more").textContent=$("controls").classList.contains("open")?"Fewer filters ▴":"More filters ▾";
+  renderSummary();
+}
+function renderSummary(){
+  const parts=[];
+  if(S.tab==="now"&&S.days.length)parts.push(S.days.length===2&&S.days.includes("sat")&&S.days.includes("sun")?"Weekend":S.days.map(d=>d[0].toUpperCase()+d.slice(1)).join(", "));
+  if(S.tab==="now"&&S.after)parts.push("from "+S.after);
+  if(S.tab==="now"&&S.before)parts.push("before "+S.before);
+  if(S.cert)parts.push(S.cert==="U"?"U only":S.cert+" & under");
+  if(S.min)parts.push("IMDb "+S.min+"+");
+  if(S.series)parts.push(S.series==="yes"?"Part of a series":"Stand-alone");
+  if(S.cinema)parts.push((CIN[S.cinema]||{}).name||S.cinema);
+  if(S.q)parts.push("“"+S.q+"”");
+  $("nact").textContent=parts.length||"";
+  const sl=(SORTS[S.tab].find(x=>x[0]===S.sort)||[])[1]||S.sort;
+  $("summ").textContent=(parts.length?parts.join(" · ")+" · ":"")+sl+(S.dir==="desc"?" ↓":" ↑");
+}
+function setOpen(o){
+  $("controls").classList.toggle("open",o);
+  $("toggle").setAttribute("aria-expanded",String(o));
+  $("tchev").textContent=o?"▴":"▾";
 }
 function render(){
   writeURL();renderControls();
@@ -345,7 +373,8 @@ function build(){
   $("dir").addEventListener("click",()=>{S.dir=S.dir==="desc"?"asc":"desc";render();});
   let qt;$("q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{S.q=e.target.value.trim();render();},150);});
   for(const id of ["after","before","min","series","cinema"])$(id).addEventListener("change",e=>{S[id]=e.target.value;render();});
-  $("more").addEventListener("click",()=>{$("controls").classList.toggle("open");renderControls();});
+  $("toggle").addEventListener("click",()=>setOpen(!$("controls").classList.contains("open")));
+  $("done").addEventListener("click",()=>{setOpen(false);window.scrollTo({top:0});});
   $("reset").addEventListener("click",resetAll);
   $("share").addEventListener("click",async()=>{
     const url=location.href;
