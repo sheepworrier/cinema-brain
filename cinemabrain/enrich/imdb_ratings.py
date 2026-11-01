@@ -24,7 +24,10 @@ def _download() -> None:
 
 
 def enrich(films: list[dict]) -> None:
-    want = {f["imdb"]["id"]: f for f in films if f.get("imdb", {}).get("id")}
+    want: dict[str, list[dict]] = {}
+    for f in films:  # the same film can appear once per cinema, so keep every copy
+        if f.get("imdb", {}).get("id"):
+            want.setdefault(f["imdb"]["id"], []).append(f)
     if not want:
         return
     try:
@@ -39,4 +42,5 @@ def enrich(films: list[dict]) -> None:
             tt, _, rest = line.partition("\t")
             if tt in want:
                 rating, votes = rest.rstrip("\n").split("\t")
-                want[tt]["imdb"].update(rating=float(rating), votes=int(votes))
+                for f in want[tt]:
+                    f["imdb"].update(rating=float(rating), votes=int(votes))

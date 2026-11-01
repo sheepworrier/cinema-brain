@@ -371,37 +371,12 @@
       "13385 = Brighton Rock (1948) https://www.themoviedb.org/movie/13385"
     ]
   },
-  "UKJFF 2026: The Soundman (2025)": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018876/ukjff-2026-the-soundman-2025",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Soundman%20%282025%29",
-    "suggestions": [
-      "1529023 = The Soundman (2025) https://www.themoviedb.org/movie/1529023",
-      "706895 = The Soundman (1950) https://www.themoviedb.org/movie/706895",
-      "1780132 = Morsefest 2025 (2026) https://www.themoviedb.org/movie/1780132",
-      "1629144 = Krone 2025 (2025) https://www.themoviedb.org/movie/1629144",
-      "1433730 = AEW Dynasty 2025 (2025) https://www.themoviedb.org/movie/1433730"
-    ]
-  },
   "Wicker Weaving Workshop": {
     "tmdb_id": null,
     "note": "",
     "odeon_link": "https://lewesdepot.org/film/wicker-weaving-workshop",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Wicker%20Weaving%20Workshop",
     "suggestions": []
-  },
-  "Wild Horse Nine - Preview": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018627/wild-horse-nine-preview",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Wild%20Horse%20Nine%20-%20Preview",
-    "suggestions": [
-      "891621 = Wild Horse Nine (2026) https://www.themoviedb.org/movie/891621",
-      "1368918 = Preview (1982) https://www.themoviedb.org/movie/1368918",
-      "1300154 = Preview (2014) https://www.themoviedb.org/movie/1300154",
-      "426129 = Preview (1989) https://www.themoviedb.org/movie/426129"
-    ]
   },
   "CBeebies Panto 2026: Treasure Island": {
     "tmdb_id": 1785679,
@@ -424,6 +399,31 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Ken%20Russell%27s%20The%20Devils",
     "suggestions": [
       "31767 = The Devils (1971) https://www.themoviedb.org/movie/31767"
+    ]
+  },
+  "UKJFF 2026: The Soundman (2025)": {
+    "tmdb_id": 1529023,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018876/ukjff-2026-the-soundman-2025",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Soundman%20%282025%29",
+    "suggestions": [
+      "1529023 = The Soundman (2025) https://www.themoviedb.org/movie/1529023",
+      "706895 = The Soundman (1950) https://www.themoviedb.org/movie/706895",
+      "1780132 = Morsefest 2025 (2026) https://www.themoviedb.org/movie/1780132",
+      "1629144 = Krone 2025 (2025) https://www.themoviedb.org/movie/1629144",
+      "1433730 = AEW Dynasty 2025 (2025) https://www.themoviedb.org/movie/1433730"
+    ]
+  },
+  "Wild Horse Nine - Preview": {
+    "tmdb_id": 891621,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018627/wild-horse-nine-preview",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Wild%20Horse%20Nine%20-%20Preview",
+    "suggestions": [
+      "891621 = Wild Horse Nine (2026) https://www.themoviedb.org/movie/891621",
+      "1368918 = Preview (1982) https://www.themoviedb.org/movie/1368918",
+      "1300154 = Preview (2014) https://www.themoviedb.org/movie/1300154",
+      "426129 = Preview (1989) https://www.themoviedb.org/movie/426129"
     ]
   }
 }
