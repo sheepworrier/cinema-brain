@@ -13,7 +13,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
 from .enrich import imdb_ratings
-from .enrich.tmdb import Tmdb, mark_rereleases
+from .enrich.tmdb import Tmdb, mark_rereleases, update_overrides
 from .sources.odeon import OdeonSource
 from .util import ROOT, load_env
 
@@ -67,7 +67,9 @@ def main():
         films.extend(got)
 
     print("Enriching via TMDB ...")
-    Tmdb().enrich(films)
+    tm = Tmdb()
+    tm.enrich(films)
+    update_overrides(tm, films)
     mark_rereleases(films)
     print("IMDb ratings ...")
     imdb_ratings.enrich(films)

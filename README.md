@@ -8,7 +8,7 @@ by link (the state lives in the URL).
   ODEON API token, then pulls showtimes, films and certificates. To add cinemas later, write another
   Source and add it to `sources()` in `cinemabrain/build.py`.
 - `cinemabrain/enrich/tmdb.py`: cast, IMDb id and "Part of a series" (TMDB collection).
-  Wrong matches can be fixed in `overrides.json`: `{"ODEON title": <tmdb id or null>}`.
+  Unmatched films get an entry in `overrides.json` (links + suggestions); set its `tmdb_id` to fix the match.
 - `cinemabrain/enrich/imdb_ratings.py`: rating and votes from IMDb's free daily dataset.
 - `docs/`: the static site served by GitHub Pages (`index.html` and `data.json`).
 - `run_weekly.sh` + `launchd/com.cinemabrain.weekly.plist`: build, push and notify every Thursday at 07:00.

@@ -1,9 +1,12 @@
 """TMDB enrichment: IMDb id, main cast, collection ("Part of a series"), synopsis fallback.
 
 Needs TMDB_API_KEY in .env (either the v3 "API Key" or the v4 "API Read Access Token").
-Matches are cached in cache/tmdb.json; fix bad matches in overrides.json:
-  {"<cinema film title>": 12345}   -> force TMDB movie id
-  {"<cinema film title>": null}    -> force "no match"
+Matches are cached in cache/tmdb.json. Fix matches in overrides.json (edit it in ProjectManager).
+Every run adds an entry for each film TMDB could not match, with links and suggestions:
+  "<ODEON title>": {"tmdb_id": null, ...}   -> undecided, normal automatic matching
+  "tmdb_id": 12345                          -> force that TMDB movie (the number in its TMDB URL)
+  "tmdb_id": 0                              -> there is no TMDB film for this; stop suggesting
+Only tmdb_id is read back; your edits are never overwritten.
 """
 from __future__ import annotations
 
@@ -93,8 +96,9 @@ class Tmdb:
 
     def match(self, film: dict) -> int | None:
         title = film["title"]
-        if title in self.overrides:
-            return self.overrides[title]
+        o = self.overrides.get(title)
+        if isinstance(o, dict) and o.get("tmdb_id") is not None:
+            return int(o["tmdb_id"]) or None
         if film.get("isEvent") or EVENT_HINT.search(title):
             return None
         ck = f"{title}|{film.get('release') or ''}"
@@ -152,6 +156,54 @@ class Tmdb:
             if info.get("year") and rel_year and rel_year - info["year"] >= 2:
                 f["rerelease"] = True
         self.save()
+
+
+def _suggestions(tmdb: "Tmdb", title: str) -> list[str]:
+    base = clean_title(title).replace("\u2122", "")
+    queries = [base] + [q.strip() for q in re.split(r"\s*(?:[:+&\u2013(]|\band\b|\s-\s)\s*", base) if len(q.strip()) > 3]
+    seen: dict[int, str] = {}
+    for q in dict.fromkeys(queries):
+        try:
+            res = tmdb._get("/search/movie", query=q, include_adult="false").get("results", [])[:3]
+        except Exception:
+            continue
+        for r in res:
+            seen.setdefault(
+                r["id"],
+                f"{r['id']} = {r.get('title')} ({(r.get('release_date') or '????')[:4]}) https://www.themoviedb.org/movie/{r['id']}",
+            )
+        if len(seen) >= 5:
+            break
+    return list(seen.values())[:5]
+
+
+def update_overrides(tmdb: "Tmdb", films: list[dict]) -> None:
+    """Add/refresh helper entries in overrides.json for films TMDB couldn't match."""
+    if not tmdb.enabled:
+        return
+    old = tmdb.overrides
+    new: dict = {}
+    for k, v in old.items():  # keep every decision the user has made
+        if isinstance(v, dict) and v.get("tmdb_id") is not None:
+            new[k] = v
+    for f in films:
+        if f.get("tmdb") or f["title"] in new:
+            continue
+        looks_event = f.get("isEvent") or EVENT_HINT.search(f["title"])
+        prev = old.get(f["title"]) if isinstance(old.get(f["title"]), dict) else {}
+        link = next(iter(f.get("links", {}).values()), None)
+        new[f["title"]] = {
+            "tmdb_id": None,
+            "note": "Looks like a live/event screening, so probably no TMDB film" if looks_event else "",
+            "odeon_link": link,
+            "tmdb_search": "https://www.themoviedb.org/search/movie?query=" + urllib.parse.quote(clean_title(f["title"])),
+            "suggestions": prev.get("suggestions") or ([] if looks_event else _suggestions(tmdb, f["title"])),
+        }
+    out = {"_help": "Set tmdb_id to the number in a TMDB film URL (themoviedb.org/movie/<number>) to force that match, "
+                    "or 0 if TMDB has no such film. Leave null to keep automatic matching. Suggestions are guesses: check them."}
+    out.update(dict(sorted(new.items(), key=lambda kv: (kv[1].get("tmdb_id") is not None, kv[0].lower()))))
+    OVERRIDES.write_text(json.dumps(out, indent=2, ensure_ascii=False) + "\n")
+    tmdb.overrides = out
 
 
 def mark_rereleases(films: list[dict]) -> None:

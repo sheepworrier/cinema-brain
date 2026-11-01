@@ -1,1 +1,161 @@
-{}
+{
+  "_help": "Set tmdb_id to the number in a TMDB film URL (themoviedb.org/movie/<number>) to force that match, or 0 if TMDB has no such film. Leave null to keep automatic matching. Suggestions are guesses: check them.",
+  "Andrew Lloyd Webber’s Starlight Express": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/andrew-lloyd-webbers-starlight-express/HO00009707/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andrew%20Lloyd%20Webber%E2%80%99s%20Starlight%20Express",
+    "suggestions": []
+  },
+  "CBeebies Panto 2026: Treasure Island": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/cbeebies-panto-2026-treasure-island/HO00009679/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=CBeebies%20Panto%202026%3A%20Treasure%20Island",
+    "suggestions": []
+  },
+  "Doctor Who: The Satan Pit": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/doctor-who-the-satan-pit/HO00009550/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Doctor%20Who%3A%20The%20Satan%20Pit",
+    "suggestions": []
+  },
+  "Festive Fun with Peppa Cinema Experience": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/festive-fun-with-peppa-cinema-experience/HO00009601/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Festive%20Fun%20with%20Peppa%20Cinema%20Experience",
+    "suggestions": []
+  },
+  "George Michael: The Faith Tour": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/george-michael-the-faith-tour/HO00009672/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=George%20Michael%3A%20The%20Faith%20Tour",
+    "suggestions": []
+  },
+  "GIANT – The Play": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/giant-the-play/HO00009162/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=GIANT%20%E2%80%93%20The%20Play",
+    "suggestions": []
+  },
+  "Hadestown: The Musical": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/hadestown-the-musical/HO00009329/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Hadestown%3A%20The%20Musical",
+    "suggestions": []
+  },
+  "Ken Russell's The Devils": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/ken-russell-s-the-devils/HO00009751/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Ken%20Russell%27s%20The%20Devils",
+    "suggestions": [
+      "31767 = The Devils (1971) https://www.themoviedb.org/movie/31767"
+    ]
+  },
+  "Mission Santa": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/mission-santa/HO00009086/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Mission%20Santa",
+    "suggestions": [
+      "1455686 = Mission Santa: Yoyo To The Rescue (2025) https://www.themoviedb.org/movie/1455686",
+      "249033 = A Country Christmas (2013) https://www.themoviedb.org/movie/249033",
+      "307172 = Santa Hunters (2014) https://www.themoviedb.org/movie/307172",
+      "238302 = Saving Santa (2013) https://www.themoviedb.org/movie/238302"
+    ]
+  },
+  "National Theatre Live: Golden Boy": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/national-theatre-live-golden-boy/HO00009338/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=National%20Theatre%20Live%3A%20Golden%20Boy",
+    "suggestions": []
+  },
+  "Ramayana (Hindi)": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/ramayana-hindi/HO00009710/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Ramayana%20%28Hindi%29",
+    "suggestions": [
+      "656908 = Ramayana: Rise of a Legend (2026) https://www.themoviedb.org/movie/656908",
+      "54892 = Ramayana: The Epic (2010) https://www.themoviedb.org/movie/54892",
+      "84092 = Ramayana: The Legend of Prince Rama (1997) https://www.themoviedb.org/movie/84092",
+      "456570 = Hindi Medium (2017) https://www.themoviedb.org/movie/456570",
+      "1521588 = Film Mish Hindi (????) https://www.themoviedb.org/movie/1521588"
+    ]
+  },
+  "RBO Cinema Season 2026-27: Carmen": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/rbo-cinema-season-2026-27-carmen/HO00008945/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Cinema%20Season%202026-27%3A%20Carmen",
+    "suggestions": []
+  },
+  "RBO Cinema Season 2026-27: The Nutcracker": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/rbo-cinema-season-2026-27-the-nutcracker/HO00008947/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Cinema%20Season%202026-27%3A%20The%20Nutcracker",
+    "suggestions": []
+  },
+  "Screen Unseen (2 November)": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/screen-unseen-2-november/HO00008122/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Screen%20Unseen%20%282%20November%29",
+    "suggestions": []
+  },
+  "Stray Kids World Tour <RUN IT> LIVE VIEWING": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/stray-kids-world-tour-run-it-live-viewing/HO00009688/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Stray%20Kids%20World%20Tour%20%3CRUN%20IT%3E%20LIVE%20VIEWING",
+    "suggestions": []
+  },
+  "Sunrise on the Reaping: Sunrise Event Screening": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/sunrise-on-the-reaping-sunrise-event-screening/HO00009789/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Sunrise%20on%20the%20Reaping%3A%20Sunrise%20Event%20Screening",
+    "suggestions": [
+      "1300968 = The Hunger Games: Sunrise on the Reaping (2026) https://www.themoviedb.org/movie/1300968"
+    ]
+  },
+  "Tabby McTat + The Room on the Broom": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/tabby-mctat-the-room-on-the-broom/HO00005850/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Tabby%20McTat%20%2B%20The%20Room%20on%20the%20Broom",
+    "suggestions": [
+      "1205520 = Tabby McTat (2024) https://www.themoviedb.org/movie/1205520",
+      "152581 = Room on the Broom (2012) https://www.themoviedb.org/movie/152581"
+    ]
+  },
+  "The Irregular at Magic High School: Yotsuba Arc": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/the-irregular-at-magic-high-school-yotsuba-arc/HO00009754/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Irregular%20at%20Magic%20High%20School%3A%20Yotsuba%20Arc",
+    "suggestions": [
+      "1310387 = The Irregular at Magic High School THE MOVIE - Yotsuba Succession Arc - (2026) https://www.themoviedb.org/movie/1310387"
+    ]
+  },
+  "THE SNOWMAN™ & THE SNOWMAN™ AND THE SNOWDOG": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/the-snowmantm-the-snowmantm-and-the-snowdog/HO00003546/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=THE%20SNOWMAN%E2%84%A2%20%26%20THE%20SNOWMAN%E2%84%A2%20AND%20THE%20SNOWDOG",
+    "suggestions": [
+      "185025 = The Snowman and the Snowdog (2012) https://www.themoviedb.org/movie/185025",
+      "372343 = The Snowman (2017) https://www.themoviedb.org/movie/372343",
+      "13396 = The Snowman (1982) https://www.themoviedb.org/movie/13396",
+      "777401 = The Snowman (1901) https://www.themoviedb.org/movie/777401"
+    ]
+  }
+}

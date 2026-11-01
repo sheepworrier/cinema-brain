@@ -15,7 +15,7 @@ if ! .venv/bin/python -m cinemabrain.build; then
   exit 1
 fi
 
-git add docs/
+git add docs/ overrides.json
 if ! git diff --cached --quiet; then
   git commit -q -m "Listings update $(date +%Y-%m-%d)"
 fi
