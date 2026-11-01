@@ -53,32 +53,12 @@
       "942027 = Broadcast (2022) https://www.themoviedb.org/movie/942027"
     ]
   },
-  "Cbeebies Panto: Treasure Island": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://lewesdepot.org/film/cbeebies-panto-treasure-island",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Cbeebies%20Panto%3A%20Treasure%20Island",
-    "suggestions": []
-  },
   "Chicken Shop Date: The Final Series": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018915/chicken-shop-date-the-final-series",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Chicken%20Shop%20Date%3A%20The%20Final%20Series",
     "suggestions": []
-  },
-  "Duke's After Dark: Teenage Sex & Death at Camp Miasma (35mm) + Jane Schoenbrun Recorded Intro": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018963/duke-s-after-dark-teenage-sex-death-at-camp-miasma-35mm-jane-schoenbrun-recorded-intro",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Teenage%20Sex%20%26%20Death%20at%20Camp%20Miasma%20%2835mm%29",
-    "suggestions": [
-      "1240889 = Teenage Sex and Death at Camp Miasma (2026) https://www.themoviedb.org/movie/1240889",
-      "1441108 = Teenage Sex Therapy (1976) https://www.themoviedb.org/movie/1441108",
-      "26449 = Sex and the Teenage Mind (2002) https://www.themoviedb.org/movie/26449",
-      "991321 = 35MM (2022) https://www.themoviedb.org/movie/991321",
-      "1729816 = Sinopsis Filem 35mm (2022) https://www.themoviedb.org/movie/1729816"
-    ]
   },
   "Fast & Furious Screenwriting: Halloween": {
     "tmdb_id": null,
@@ -385,12 +365,32 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=CBeebies%20Panto%202026%3A%20Treasure%20Island",
     "suggestions": []
   },
+  "Cbeebies Panto: Treasure Island": {
+    "tmdb_id": 1785679,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://lewesdepot.org/film/cbeebies-panto-treasure-island",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Cbeebies%20Panto%3A%20Treasure%20Island",
+    "suggestions": []
+  },
   "Doctor Who: The Satan Pit": {
     "tmdb_id": 1770183,
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.odeon.co.uk/films/doctor-who-the-satan-pit/HO00009550/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Doctor%20Who%3A%20The%20Satan%20Pit",
     "suggestions": []
+  },
+  "Duke's After Dark: Teenage Sex & Death at Camp Miasma (35mm) + Jane Schoenbrun Recorded Intro": {
+    "tmdb_id": 1240889,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018963/duke-s-after-dark-teenage-sex-death-at-camp-miasma-35mm-jane-schoenbrun-recorded-intro",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Teenage%20Sex%20%26%20Death%20at%20Camp%20Miasma%20%2835mm%29",
+    "suggestions": [
+      "1240889 = Teenage Sex and Death at Camp Miasma (2026) https://www.themoviedb.org/movie/1240889",
+      "1441108 = Teenage Sex Therapy (1976) https://www.themoviedb.org/movie/1441108",
+      "26449 = Sex and the Teenage Mind (2002) https://www.themoviedb.org/movie/26449",
+      "991321 = 35MM (2022) https://www.themoviedb.org/movie/991321",
+      "1729816 = Sinopsis Filem 35mm (2022) https://www.themoviedb.org/movie/1729816"
+    ]
   },
   "Ken Russell's The Devils": {
     "tmdb_id": 31767,
