@@ -1,23 +1,18 @@
 {
   "_help": "Set tmdb_id to the number in a TMDB film URL (themoviedb.org/movie/<number>) to force that match, or 0 if TMDB has no such film. Leave null to keep automatic matching. Suggestions are guesses: check them.",
+  "Andre Rieu 2026 Christmas Concert: Let it Snow": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/andre-rieu-2026-christmas-concert-let-it-snow/HO00009249/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andre%20Rieu%202026%20Christmas%20Concert%3A%20Let%20it%20Snow",
+    "suggestions": []
+  },
   "Andrew Lloyd Webber’s Starlight Express": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.odeon.co.uk/films/andrew-lloyd-webbers-starlight-express/HO00009707/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andrew%20Lloyd%20Webber%E2%80%99s%20Starlight%20Express",
     "suggestions": []
-  },
-  "Andrew Lloyd Webber’s Starlight Express – Live On Stage": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://lewesdepot.org/film/andrew-lloyd-webbers-starlight-express-live-on-stage",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Andrew%20Lloyd%20Webber%E2%80%99s%20Starlight%20Express%20%E2%80%93%20Live%20On%20Stage",
-    "suggestions": [
-      "1748001 = Starlight Express (2026) https://www.themoviedb.org/movie/1748001",
-      "651985 = The SpongeBob Musical: Live on Stage! (2019) https://www.themoviedb.org/movie/651985",
-      "688688 = Live On Stage (????) https://www.themoviedb.org/movie/688688",
-      "719803 = Hetty Feather: Live on Stage (2020) https://www.themoviedb.org/movie/719803"
-    ]
   },
   "Autumn Light: Creative Photography": {
     "tmdb_id": null,
@@ -53,11 +48,38 @@
       "942027 = Broadcast (2022) https://www.themoviedb.org/movie/942027"
     ]
   },
+  "BTS WORLD TOUR 'ARIRANG' IN KAOHSIUNG: LIVE": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/bts-world-tour-arirang-in-kaohsiung-live/HO00009820/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=BTS%20WORLD%20TOUR%20%27ARIRANG%27%20IN%20KAOHSIUNG%3A%20LIVE",
+    "suggestions": [
+      "1389172 = Reporting Live (2026) https://www.themoviedb.org/movie/1389172",
+      "8337 = They Live (1988) https://www.themoviedb.org/movie/8337",
+      "31439 = To Live (1994) https://www.themoviedb.org/movie/31439"
+    ]
+  },
   "Chicken Shop Date: The Final Series": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018915/chicken-shop-date-the-final-series",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Chicken%20Shop%20Date%3A%20The%20Final%20Series",
+    "suggestions": []
+  },
+  "Dog-Friendly Screening: You Can See Everything": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018944/dog-friendly-screening-you-can-see-everything",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Dog-Friendly%20Screening%3A%20You%20Can%20See%20Everything",
+    "suggestions": [
+      "1765072 = You Can See Everything (2026) https://www.themoviedb.org/movie/1765072"
+    ]
+  },
+  "Donga Naa Koduku": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/donga-naa-koduku/HO00009442/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Donga%20Naa%20Koduku",
     "suggestions": []
   },
   "Fast & Furious Screenwriting: Halloween": {
@@ -76,7 +98,7 @@
   "Festive Fun with Peppa Cinema Experience": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/festive-fun-with-peppa-cinema-experience/HO00009601/",
+    "odeon_link": "https://www.odeon.co.uk/films/festive-fun-with-peppa-cinema-experience/HO00009602/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Festive%20Fun%20with%20Peppa%20Cinema%20Experience",
     "suggestions": []
   },
@@ -85,6 +107,13 @@
     "note": "",
     "odeon_link": "https://lewesdepot.org/film/festive-wines",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Festive%20Wines",
+    "suggestions": []
+  },
+  "Fjord Unlimited Screening": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.cineworld.co.uk/films/1000054335-fjord-unlimited-screening",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Fjord%20Unlimited%20Screening",
     "suggestions": []
   },
   "George Michael: The Faith Tour": {
@@ -99,13 +128,6 @@
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.odeon.co.uk/films/giant-the-play/HO00009162/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=GIANT%20%E2%80%93%20The%20Play",
-    "suggestions": []
-  },
-  "Hadestown: The Musical": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/hadestown-the-musical/HO00009329/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Hadestown%3A%20The%20Musical",
     "suggestions": []
   },
   "Heated Rivalry: Season 01 - Epi 01 & 02": {
@@ -171,6 +193,20 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Making%20Your%20Micro-Budget%20Feature",
     "suggestions": []
   },
+  "Met Opera Encore 2026-27: Samson et Dalila": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018027/met-opera-encore-2026-27-samson-et-dalila",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Met%20Opera%20Encore%202026-27%3A%20Samson%20et%20Dalila",
+    "suggestions": []
+  },
+  "Met Opera Live 2026-27: Samson et Dalila": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018026/met-opera-live-2026-27-samson-et-dalila",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Met%20Opera%20Live%202026-27%3A%20Samson%20et%20Dalila",
+    "suggestions": []
+  },
   "Mission Santa": {
     "tmdb_id": null,
     "note": "",
@@ -181,6 +217,19 @@
       "249033 = A Country Christmas (2013) https://www.themoviedb.org/movie/249033",
       "307172 = Santa Hunters (2014) https://www.themoviedb.org/movie/307172",
       "238302 = Saving Santa (2013) https://www.themoviedb.org/movie/238302"
+    ]
+  },
+  "Momo and the Time Thieves": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/momo-and-the-time-thieves/HO00009163/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Momo%20and%20the%20Time%20Thieves",
+    "suggestions": [
+      "1175842 = Momo (2025) https://www.themoviedb.org/movie/1175842",
+      "443398 = Finding Momo (2017) https://www.themoviedb.org/movie/443398",
+      "2265 = Momo (1986) https://www.themoviedb.org/movie/2265",
+      "628797 = The Horse Thieves. Roads of Time (2021) https://www.themoviedb.org/movie/628797",
+      "464361 = Saga of the Vagabonds, Part One: Tiger and Wolf (1937) https://www.themoviedb.org/movie/464361"
     ]
   },
   "National Theatre Live: Golden Boy": {
@@ -224,25 +273,11 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Encore%202026-27%3A%20Carmen",
     "suggestions": []
   },
-  "RBO Encore 2026-27: Manon": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018056/rbo-encore-2026-27-manon",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Encore%202026-27%3A%20Manon",
-    "suggestions": []
-  },
   "RBO Encore 2026-27: The Nutcracker (2025 Encore)": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
     "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018060/rbo-encore-2026-27-the-nutcracker-2025-encore",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Encore%202026-27%3A%20The%20Nutcracker",
-    "suggestions": []
-  },
-  "RBO Live 2026-27: The Nutcracker (2025 Encore)": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018059/rbo-live-2026-27-the-nutcracker-2025-encore",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Live%202026-27%3A%20The%20Nutcracker",
     "suggestions": []
   },
   "RBO: Carmen (Opera)": {
@@ -259,19 +294,27 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%3A%20The%20Nutcracker%20%28Ballet%29",
     "suggestions": []
   },
-  "Screen Unseen (2 November)": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/screen-unseen-2-november/HO00008122/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Screen%20Unseen%20%282%20November%29",
-    "suggestions": []
-  },
-  "Secret Screening": {
+  "Relaxed Screening: The Apartment": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.cineworld.co.uk/films/1000053008-secret-screening",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Secret%20Screening",
-    "suggestions": []
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018931/relaxed-screening-the-apartment",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Relaxed%20Screening%3A%20The%20Apartment",
+    "suggestions": [
+      "284 = The Apartment (1960) https://www.themoviedb.org/movie/284",
+      "12531 = The Apartment (1996) https://www.themoviedb.org/movie/12531",
+      "1341374 = The Apartment (2024) https://www.themoviedb.org/movie/1341374"
+    ]
+  },
+  "Relaxed Screening: Wildwood": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018959/relaxed-screening-wildwood",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Relaxed%20Screening%3A%20Wildwood",
+    "suggestions": [
+      "791523 = Wildwood (2026) https://www.themoviedb.org/movie/791523",
+      "1722901 = Wildwood Nights (1990) https://www.themoviedb.org/movie/1722901",
+      "1702928 = Wildwood (2014) https://www.themoviedb.org/movie/1702928"
+    ]
   },
   "Stray Kids World Tour <RUN IT> LIVE VIEWING": {
     "tmdb_id": null,
@@ -299,6 +342,19 @@
       "152581 = Room on the Broom (2012) https://www.themoviedb.org/movie/152581"
     ]
   },
+  "THE FOUR - World Premiere": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/the-four-world-premiere/HO00009818/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=THE%20FOUR%20-%20World%20Premiere",
+    "suggestions": [
+      "1516738 = Marvel Studios' The Fantastic Four: First Steps - World Premiere (2025) https://www.themoviedb.org/movie/1516738",
+      "617126 = The Fantastic 4: First Steps (2025) https://www.themoviedb.org/movie/617126",
+      "1401586 = Sonic the Hedgehog 4 (2027) https://www.themoviedb.org/movie/1401586",
+      "525524 = The Diary 4 (2000) https://www.themoviedb.org/movie/525524",
+      "386984 = World Premiere (1941) https://www.themoviedb.org/movie/386984"
+    ]
+  },
   "The Irregular at Magic High School: Yotsuba Arc": {
     "tmdb_id": null,
     "note": "",
@@ -315,18 +371,6 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Renowned%20Billy%20Waters",
     "suggestions": []
   },
-  "THE SNOWMAN™ & THE SNOWMAN™ AND THE SNOWDOG": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/the-snowmantm-the-snowmantm-and-the-snowdog/HO00003546/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=THE%20SNOWMAN%E2%84%A2%20%26%20THE%20SNOWMAN%E2%84%A2%20AND%20THE%20SNOWDOG",
-    "suggestions": [
-      "185025 = The Snowman and the Snowdog (2012) https://www.themoviedb.org/movie/185025",
-      "372343 = The Snowman (2017) https://www.themoviedb.org/movie/372343",
-      "13396 = The Snowman (1982) https://www.themoviedb.org/movie/13396",
-      "777401 = The Snowman (1901) https://www.themoviedb.org/movie/777401"
-    ]
-  },
   "The Trip to the Northern Lights: Special Preview and Broadcast Q&A": {
     "tmdb_id": null,
     "note": "",
@@ -340,6 +384,13 @@
       "660473 = 2019 Winterfest Preview Special (2018) https://www.themoviedb.org/movie/660473"
     ]
   },
+  "Tours of the Duke of York's": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00014888/tours-of-the-duke-of-york-s",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Tours%20of%20the%20Duke%20of%20York%27s",
+    "suggestions": []
+  },
   "UKJFF 2026: British-Jewish Life on Film: Brighton + Q&A": {
     "tmdb_id": null,
     "note": "",
@@ -351,12 +402,18 @@
       "13385 = Brighton Rock (1948) https://www.themoviedb.org/movie/13385"
     ]
   },
-  "Wicker Weaving Workshop": {
+  "World Children's Day: Willy Wonka and The Chocolate Factory": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://lewesdepot.org/film/wicker-weaving-workshop",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Wicker%20Weaving%20Workshop",
-    "suggestions": []
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018936/world-children-s-day-willy-wonka-and-the-chocolate-factory",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=World%20Children%27s%20Day%3A%20Willy%20Wonka%20and%20The%20Chocolate%20Factory",
+    "suggestions": [
+      "264826 = The Concert For World Children's Day (2002) https://www.themoviedb.org/movie/264826",
+      "252 = Willy Wonka & the Chocolate Factory (1971) https://www.themoviedb.org/movie/252",
+      "455411 = Tom and Jerry: Willy Wonka & the Chocolate Factory (2017) https://www.themoviedb.org/movie/455411",
+      "413393 = Pure Imagination: The Story of 'Willy Wonka & the Chocolate Factory' (2001) https://www.themoviedb.org/movie/413393",
+      "118 = Charlie and the Chocolate Factory (2005) https://www.themoviedb.org/movie/118"
+    ]
   },
   "CBeebies Panto 2026: Treasure Island": {
     "tmdb_id": 1785679,
