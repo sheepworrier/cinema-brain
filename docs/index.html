@@ -89,6 +89,8 @@ details.syn[open] summary .chev{transform:rotate(180deg)}
 .time{font-size:13px;font-variant-numeric:tabular-nums;background:var(--chip);border-radius:6px;padding:3px 7px;white-space:nowrap;text-decoration:none}
 a.time:hover{outline:1px solid var(--accent)}
 .time i{font-style:normal;font-size:10px;color:var(--muted);margin-left:3px;letter-spacing:.03em}
+.chk{display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer}
+.chk input{width:18px;height:18px;accent-color:var(--accent)}
 .time.sold{text-decoration:line-through;opacity:.5}
 .booking{font-size:13px;color:var(--muted);margin-top:10px;border-top:1px solid var(--line);padding-top:9px}
 .empty{text-align:center;color:var(--muted);padding:40px 10px}
@@ -144,6 +146,9 @@ footer a{color:var(--accent)}
         <option value="21:00">before 21:00</option>
       </select>
     </div>
+    <div class="row now-only">
+      <label class="chk"><input type="checkbox" id="hidepast"> Hide showings that started over 30 minutes ago</label>
+    </div>
     <div class="row">
       <span class="lbl">IMDb</span>
       <select id="min" aria-label="Minimum IMDb rating">
@@ -187,6 +192,13 @@ const defaultCinemas=()=>DATA.cinemas.some(c=>c.id===DEFAULT_CINEMA)?[DEFAULT_CI
 const sameSet=(a,b)=>a.length===b.length&&a.every(x=>b.includes(x));
 const cinIdx=id=>Math.max(0,DATA.cinemas.findIndex(c=>c.id===id));
 const S={}; // current state
+// London wall-clock "YYYY-MM-DDTHH:MM" for now-30min, comparable with s.d+"T"+s.t
+function cutoff(){
+  const p=Object.fromEntries(new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/London",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"})
+    .formatToParts(new Date(Date.now()-30*60000)).map(x=>[x.type,x.value]));
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+}
+let CUT="";
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -205,6 +217,7 @@ function readURL(){
   S.after=p.get("after")||""; S.before=p.get("before")||"";
   S.cert=CERTS.includes(p.get("cert"))?p.get("cert"):"";
   S.series=["yes","no"].includes(p.get("series"))?p.get("series"):"";
+  S.hidepast=p.get("past")!=="show";
   S.min=p.get("min")||""; S.q=p.get("q")||"";
   const ids=DATA.cinemas.map(c=>c.id), cp=p.get("cinema");
   const want=cp==="all"?ids:(cp||"").split(",").filter(x=>ids.includes(x));
@@ -221,6 +234,7 @@ function writeURL(){
     if(S.after)p.set("after",S.after);
     if(S.before)p.set("before",S.before);
   }
+  if(S.tab==="now"&&!S.hidepast)p.set("past","show");
   if(S.cert)p.set("cert",S.cert);
   if(S.series)p.set("series",S.series);
   if(S.min)p.set("min",S.min);
@@ -240,6 +254,7 @@ function showsFor(f){
       if(S.days.length&&!S.days.includes(wd(s.d)))return false;
       if(S.after&&s.t<S.after)return false;
       if(S.before&&s.t>=S.before)return false;
+      if(S.hidepast&&s.d+"T"+s.t<CUT)return false;
     }
     return true;
   });
@@ -339,6 +354,7 @@ function renderControls(){
   $("dir").textContent=S.dir==="desc"?"↓ High → low":"↑ Low → high";
   if(S.sort==="title")$("dir").textContent=S.dir==="desc"?"↓ Z → A":"↑ A → Z";
   if(S.sort==="time"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
+  $("hidepast").checked=S.hidepast;
   $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;
   if(document.activeElement!==$("q"))$("q").value=S.q;
   renderSummary();
@@ -346,6 +362,7 @@ function renderControls(){
 function renderSummary(){
   const parts=[];
   if(S.tab==="now"&&S.days.length)parts.push(S.days.length===2&&S.days.includes("sat")&&S.days.includes("sun")?"Weekend":S.days.map(d=>d[0].toUpperCase()+d.slice(1)).join(", "));
+  if(S.tab==="now"&&!S.hidepast)parts.push("incl. past showings");
   if(S.tab==="now"&&S.after)parts.push("from "+S.after);
   if(S.tab==="now"&&S.before)parts.push("before "+S.before);
   if(S.cert)parts.push(S.cert==="U"?"U only":S.cert+" & under");
@@ -363,10 +380,10 @@ function setOpen(o){
   $("tchev").textContent=o?"▴":"▾";
 }
 function render(){
-  writeURL();renderControls();
+  CUT=cutoff();writeURL();renderControls();
   const single=S.cinemas.length===1?(CIN[S.cinemas[0]]||{}).name:"Brighton & Lewes";
   $("h1").textContent="What's on — "+single;document.title="CinemaBrain — "+single;
-  const inSel=f=>f.nowShowing&&f.shows.some(x=>S.cinemas.includes(x.c));
+  const inSel=f=>f.nowShowing&&f.shows.some(x=>S.cinemas.includes(x.c)&&!(S.hidepast&&x.d+"T"+x.t<CUT));
   $("n-now").textContent=DATA.films.filter(inSel).length;
   $("n-soon").textContent=DATA.films.filter(f=>(f.soonAt||[]).some(c=>S.cinemas.includes(c))).length;
   const list=DATA.films.filter(visible).sort(cmp);
@@ -413,6 +430,7 @@ function build(){
   $("dir").addEventListener("click",()=>{S.dir=S.dir==="desc"?"asc":"desc";render();});
   let qt;$("q").addEventListener("input",e=>{clearTimeout(qt);qt=setTimeout(()=>{S.q=e.target.value.trim();render();},150);});
   for(const id of ["after","before","min","series"])$(id).addEventListener("change",e=>{S[id]=e.target.value;render();});
+  $("hidepast").addEventListener("change",e=>{S.hidepast=e.target.checked;render();});
   $("toggle").addEventListener("click",()=>setOpen(!$("controls").classList.contains("open")));
   $("done").addEventListener("click",()=>{setOpen(false);window.scrollTo({top:0});});
   $("reset").addEventListener("click",resetAll);
