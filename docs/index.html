@@ -181,11 +181,11 @@ const CERTS=["U","PG","12A","15","18"];
 const CERTORD={U:0,PG:1,"12A":2,"15":3,"18":4,TBC:9};
 const WD=["sun","mon","tue","wed","thu","fri","sat"];
 const SORTS={
-  now:[["imdb","IMDb rating"],["votes","IMDb votes"],["title","Title"],["time","Earliest showtime"],["cert","Certificate"],["runtime","Running time"],["release","Release date"]],
+  now:[["imdb","IMDb rating"],["votes","IMDb votes"],["title","Title"],["time","Earliest showtime"],["late","Latest showtime"],["cert","Certificate"],["runtime","Running time"],["release","Release date"]],
   soon:[["release","Release date"],["imdb","IMDb rating"],["votes","IMDb votes"],["title","Title"],["cert","Certificate"]]
 };
 const DEF_SORT={now:["imdb","desc"],soon:["release","asc"]};
-const DEF_DIR={imdb:"desc",votes:"desc",title:"asc",time:"asc",cert:"asc",runtime:"asc",release:"asc"};
+const DEF_DIR={imdb:"desc",votes:"desc",title:"asc",time:"asc",late:"desc",cert:"asc",runtime:"asc",release:"asc"};
 let DATA=null, CIN={};
 const DEFAULT_CINEMA="odeon-brighton";
 const defaultCinemas=()=>DATA.cinemas.some(c=>c.id===DEFAULT_CINEMA)?[DEFAULT_CINEMA]:DATA.cinemas.map(c=>c.id);
@@ -273,6 +273,7 @@ function visible(f){
   else if(!(f.soonAt||[]).some(c=>S.cinemas.includes(c)))return false;
   return true;
 }
+function lastShow(f){const a=showsFor(f);const s=a[a.length-1];return s?s.d+s.t:"";}
 function firstShow(f){const s=showsFor(f)[0];return s?s.d+s.t:"9999";}
 function cmp(a,b){
   const r=x=>(x.imdb||{}).rating, v=x=>(x.imdb||{}).votes;
@@ -285,6 +286,7 @@ function cmp(a,b){
     case "runtime":c=nulls(a.runtime,b.runtime,d);break;
     case "cert":c=(CERTORD[a.cert]-CERTORD[b.cert])*(d?-1:1);break;
     case "time":c=firstShow(a).localeCompare(firstShow(b))*(d?-1:1);break;
+    case "late":c=lastShow(a).localeCompare(lastShow(b))*(d?-1:1);break;
     case "release":c=(a.release||"9").localeCompare(b.release||"9")*(d?-1:1);break;
     case "title":c=sortTitle(a.title).localeCompare(sortTitle(b.title))*(d?-1:1);break;
   }
@@ -353,7 +355,7 @@ function renderControls(){
   $("sort").innerHTML=SORTS[S.tab].map(([v,l])=>`<option value="${v}"${v===S.sort?" selected":""}>${l}</option>`).join("");
   $("dir").textContent=S.dir==="desc"?"↓ High → low":"↑ Low → high";
   if(S.sort==="title")$("dir").textContent=S.dir==="desc"?"↓ Z → A":"↑ A → Z";
-  if(S.sort==="time"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
+  if(S.sort==="time"||S.sort==="late"||S.sort==="release")$("dir").textContent=S.dir==="desc"?"↓ Latest first":"↑ Soonest first";
   $("hidepast").checked=S.hidepast;
   $("after").value=S.after;$("before").value=S.before;$("min").value=S.min;$("series").value=S.series;
   if(document.activeElement!==$("q"))$("q").value=S.q;
