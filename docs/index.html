@@ -199,6 +199,8 @@ function cutoff(){
   return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
 }
 let CUT="";
+// Coming soon only until the release date: data.json is built weekly, so a film can have released since
+const soonAt=f=>CUT&&f.release&&f.release<=CUT.slice(0,10)?[]:(f.soonAt||[]);
 
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -261,7 +263,7 @@ function showsFor(f){
 }
 function visible(f){
   if(S.tab==="now"&&!f.nowShowing)return false;
-  if(S.tab==="soon"&&!f.comingSoon)return false;
+  if(S.tab==="soon"&&!soonAt(f).length)return false;
   // Unrated (TBC) films stay visible on Coming soon - the certificate usually arrives near release
   if(S.cert&&!(CERTORD[f.cert]<=CERTORD[S.cert])&&!(S.tab==="soon"&&f.cert==="TBC"))return false;
   if(S.series==="yes"&&!f.series)return false;
@@ -270,7 +272,7 @@ function visible(f){
   if(S.q){const q=S.q.toLowerCase();
     if(!(f.title.toLowerCase().includes(q)||(f.actors||[]).some(a=>a.toLowerCase().includes(q))))return false;}
   if(S.tab==="now"){ if(!showsFor(f).length)return false; }
-  else if(!(f.soonAt||[]).some(c=>S.cinemas.includes(c)))return false;
+  else if(!soonAt(f).some(c=>S.cinemas.includes(c)))return false;
   return true;
 }
 function lastShow(f){const a=showsFor(f);const s=a[a.length-1];return s?s.d+s.t:"";}
@@ -387,7 +389,7 @@ function render(){
   $("h1").textContent="What's on — "+single;document.title="CinemaBrain — "+single;
   const inSel=f=>f.nowShowing&&f.shows.some(x=>S.cinemas.includes(x.c)&&!(S.hidepast&&x.d+"T"+x.t<CUT));
   $("n-now").textContent=DATA.films.filter(inSel).length;
-  $("n-soon").textContent=DATA.films.filter(f=>(f.soonAt||[]).some(c=>S.cinemas.includes(c))).length;
+  $("n-soon").textContent=DATA.films.filter(f=>soonAt(f).some(c=>S.cinemas.includes(c))).length;
   const list=DATA.films.filter(visible).sort(cmp);
   const shows=S.tab==="now"?list.reduce((n,f)=>n+showsFor(f).length,0):0;
   const bits=[list.length+(list.length===1?" film":" films")];
