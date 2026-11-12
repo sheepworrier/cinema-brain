@@ -1,5 +1,12 @@
 {
   "_help": "Set tmdb_id to the number in a TMDB film URL (themoviedb.org/movie/<number>) to force that match, or 0 if TMDB has no such film. Leave null to keep automatic matching. Suggestions are guesses: check them.",
+  "A Talent for Murder Unlimited Screening": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.cineworld.co.uk/films/1000053865-a-talent-for-murder-unlimited-screening",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=A%20Talent%20for%20Murder%20Unlimited%20Screening",
+    "suggestions": []
+  },
   "Andre Rieu 2026 Christmas Concert: Let it Snow": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
@@ -24,17 +31,6 @@
       "407390 = Autumn Lights (2016) https://www.themoviedb.org/movie/407390"
     ]
   },
-  "Blockhead + Microbudget Feature Workshop": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018769/blockhead-microbudget-feature-workshop",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Blockhead%20%2B%20Microbudget%20Feature%20Workshop",
-    "suggestions": [
-      "1213765 = Blockhead (2010) https://www.themoviedb.org/movie/1213765",
-      "1497128 = Blockhead (2025) https://www.themoviedb.org/movie/1497128",
-      "496291 = Blockhead (2017) https://www.themoviedb.org/movie/496291"
-    ]
-  },
   "Book Club: Elif Shafak In Conversation - Broadcast": {
     "tmdb_id": null,
     "note": "",
@@ -48,15 +44,15 @@
       "942027 = Broadcast (2022) https://www.themoviedb.org/movie/942027"
     ]
   },
-  "BTS WORLD TOUR 'ARIRANG' IN KAOHSIUNG: LIVE": {
+  "Book Club: Impossible Creatures with Katherine Rundell": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/bts-world-tour-arirang-in-kaohsiung-live/HO00009820/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=BTS%20WORLD%20TOUR%20%27ARIRANG%27%20IN%20KAOHSIUNG%3A%20LIVE",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00019005/book-club-impossible-creatures-with-katherine-rundell",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Book%20Club%3A%20Impossible%20Creatures%20with%20Katherine%20Rundell",
     "suggestions": [
-      "1389172 = Reporting Live (2026) https://www.themoviedb.org/movie/1389172",
-      "8337 = They Live (1988) https://www.themoviedb.org/movie/8337",
-      "31439 = To Live (1994) https://www.themoviedb.org/movie/31439"
+      "502682 = Book Club (2018) https://www.themoviedb.org/movie/502682",
+      "1365854 = The Book Club Murders (2024) https://www.themoviedb.org/movie/1365854",
+      "1010826 = Killer Book Club (2023) https://www.themoviedb.org/movie/1010826"
     ]
   },
   "Chicken Shop Date: The Final Series": {
@@ -75,30 +71,23 @@
       "1765072 = You Can See Everything (2026) https://www.themoviedb.org/movie/1765072"
     ]
   },
-  "Donga Naa Koduku": {
+  "Dune: Part One": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/donga-naa-koduku/HO00009442/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Donga%20Naa%20Koduku",
-    "suggestions": []
-  },
-  "Fast & Furious Screenwriting: Halloween": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://lewesdepot.org/film/fast-furious-screenwriting-halloween",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Fast%20%26%20Furious%20Screenwriting%3A%20Halloween",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00011079/dune-part-one",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Dune%3A%20Part%20One",
     "suggestions": [
-      "385687 = Fast X (2023) https://www.themoviedb.org/movie/385687",
-      "755679 = Fast Forever (2028) https://www.themoviedb.org/movie/755679",
-      "945937 = Fast Charlie (2023) https://www.themoviedb.org/movie/945937",
-      "948 = Halloween (1978) https://www.themoviedb.org/movie/948",
-      "424139 = Halloween (2018) https://www.themoviedb.org/movie/424139"
+      "656908 = Ramayana: Rise of a Legend (2026) https://www.themoviedb.org/movie/656908",
+      "438631 = Dune (2021) https://www.themoviedb.org/movie/438631",
+      "693134 = Dune: Part Two (2024) https://www.themoviedb.org/movie/693134",
+      "841 = Dune (1984) https://www.themoviedb.org/movie/841",
+      "1560520 = Batman: Knightfall Part 1: Knightfall (2026) https://www.themoviedb.org/movie/1560520"
     ]
   },
   "Festive Fun with Peppa Cinema Experience": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/festive-fun-with-peppa-cinema-experience/HO00009602/",
+    "odeon_link": "https://www.odeon.co.uk/films/festive-fun-with-peppa-cinema-experience/HO00009601/",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Festive%20Fun%20with%20Peppa%20Cinema%20Experience",
     "suggestions": []
   },
@@ -107,13 +96,6 @@
     "note": "",
     "odeon_link": "https://lewesdepot.org/film/festive-wines",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Festive%20Wines",
-    "suggestions": []
-  },
-  "Fjord Unlimited Screening": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.cineworld.co.uk/films/1000054335-fjord-unlimited-screening",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Fjord%20Unlimited%20Screening",
     "suggestions": []
   },
   "George Michael: The Faith Tour": {
@@ -130,49 +112,53 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=GIANT%20%E2%80%93%20The%20Play",
     "suggestions": []
   },
-  "Heated Rivalry: Season 01 - Epi 01 & 02": {
+  "Girlguiding Screening - Disney's Hexed": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.cineworld.co.uk/films/1000053717-heated-rivalry-season-01-epi-01-02",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Heated%20Rivalry%3A%20Season%2001%20-%20Epi%2001%20%26%2002",
+    "odeon_link": "https://www.odeon.co.uk/films/girlguiding-screening-disney-s-hexed/HO00009804/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Girlguiding%20Screening%20-%20Disney%27s%20Hexed",
+    "suggestions": []
+  },
+  "Hadestown: The Musical": {
+    "tmdb_id": null,
+    "note": "Looks like a live/event screening, so probably no TMDB film",
+    "odeon_link": "https://www.odeon.co.uk/films/hadestown-the-musical/HO00009329/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Hadestown%3A%20The%20Musical",
+    "suggestions": []
+  },
+  "Home Alone + Mulled Wine & Festive Cakes": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00017244/home-alone-mulled-wine-festive-cakes",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Home%20Alone%20%2B%20Mulled%20Wine%20%26%20Festive%20Cakes",
     "suggestions": [
-      "530375 = WWE Network Collection: SummerSlam's Most Heated Rivalry (2016) https://www.themoviedb.org/movie/530375",
-      "620699 = Chelsea FC - Season Review 2000/01 (2001) https://www.themoviedb.org/movie/620699",
-      "587068 = Manchester United Season Review 2000-01 (2001) https://www.themoviedb.org/movie/587068",
-      "1513574 = Liverpool F.C. - Official Season Review - 2000/01 (2001) https://www.themoviedb.org/movie/1513574"
+      "9714 = Home Alone 3 (1997) https://www.themoviedb.org/movie/9714",
+      "772 = Home Alone 2: Lost in New York (1992) https://www.themoviedb.org/movie/772",
+      "654974 = Home Sweet Home Alone (2021) https://www.themoviedb.org/movie/654974"
     ]
   },
-  "Heated Rivalry: Season 01 - Epi 03 & 04": {
+  "Jet Lag: The Game — Hide + Seek Italy": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.cineworld.co.uk/films/1000053718-heated-rivalry-season-01-epi-03-04",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Heated%20Rivalry%3A%20Season%2001%20-%20Epi%2003%20%26%2004",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018965/jet-lag-the-game-hide-seek-italy",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Jet%20Lag%3A%20The%20Game%20%E2%80%94%20Hide%20%2B%20Seek%20Italy",
     "suggestions": [
-      "530375 = WWE Network Collection: SummerSlam's Most Heated Rivalry (2016) https://www.themoviedb.org/movie/530375",
-      "620699 = Chelsea FC - Season Review 2000/01 (2001) https://www.themoviedb.org/movie/620699",
-      "587068 = Manchester United Season Review 2000-01 (2001) https://www.themoviedb.org/movie/587068",
-      "1513574 = Liverpool F.C. - Official Season Review - 2000/01 (2001) https://www.themoviedb.org/movie/1513574"
+      "18300 = Jet Lag (2002) https://www.themoviedb.org/movie/18300",
+      "409988 = Jet Lag (2011) https://www.themoviedb.org/movie/409988",
+      "882571 = Jet Lag (1981) https://www.themoviedb.org/movie/882571",
+      "312199 = The Game of Hide and Seek (2013) https://www.themoviedb.org/movie/312199",
+      "1226980 = Hide and Seek: The Game Must Go On... (2013) https://www.themoviedb.org/movie/1226980"
     ]
   },
-  "Heated Rivalry: Season 01 - Epi 05 & 06": {
+  "KNITFLICKS: Little Women": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.cineworld.co.uk/films/1000053719-heated-rivalry-season-01-epi-05-06",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Heated%20Rivalry%3A%20Season%2001%20-%20Epi%2005%20%26%2006",
+    "odeon_link": "https://lewesdepot.org/film/knitflicks-little-women",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=KNITFLICKS%3A%20Little%20Women",
     "suggestions": [
-      "530375 = WWE Network Collection: SummerSlam's Most Heated Rivalry (2016) https://www.themoviedb.org/movie/530375",
-      "620699 = Chelsea FC - Season Review 2000/01 (2001) https://www.themoviedb.org/movie/620699",
-      "587068 = Manchester United Season Review 2000-01 (2001) https://www.themoviedb.org/movie/587068",
-      "1513574 = Liverpool F.C. - Official Season Review - 2000/01 (2001) https://www.themoviedb.org/movie/1513574"
-    ]
-  },
-  "King Auk (Cinecity)": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://lewesdepot.org/film/king-auk-cinecity",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=King%20Auk",
-    "suggestions": [
-      "1705667 = The War Game at Cinecity (2026) https://www.themoviedb.org/movie/1705667"
+      "331482 = Little Women (2019) https://www.themoviedb.org/movie/331482",
+      "9587 = Little Women (1994) https://www.themoviedb.org/movie/9587",
+      "43436 = Little Women (1949) https://www.themoviedb.org/movie/43436"
     ]
   },
   "KNITFLICKS: Yarn": {
@@ -186,12 +172,14 @@
       "1569809 = A Yarn. (????) https://www.themoviedb.org/movie/1569809"
     ]
   },
-  "Making Your Micro-Budget Feature": {
+  "La Bola Negra + Discussion with writers William Rayfet Hunter and Alexandra Heminsley": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://lewesdepot.org/film/making-your-micro-budget-feature",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Making%20Your%20Micro-Budget%20Feature",
-    "suggestions": []
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00018989/la-bola-negra-discussion-with-writers-william-rayfet-hunter-and-alexandra-heminsley",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=La%20Bola%20Negra%20%2B%20Discussion%20with%20writers%20William%20Rayfet%20Hunter%20and%20Alexandra%20Heminsley",
+    "suggestions": [
+      "1422041 = La Bola Negra (2026) https://www.themoviedb.org/movie/1422041"
+    ]
   },
   "Met Opera Encore 2026-27: Samson et Dalila": {
     "tmdb_id": null,
@@ -207,37 +195,32 @@
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=Met%20Opera%20Live%202026-27%3A%20Samson%20et%20Dalila",
     "suggestions": []
   },
-  "Mission Santa": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/mission-santa/HO00009085/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Mission%20Santa",
-    "suggestions": [
-      "1455686 = Mission Santa: Yoyo To The Rescue (2025) https://www.themoviedb.org/movie/1455686",
-      "249033 = A Country Christmas (2013) https://www.themoviedb.org/movie/249033",
-      "307172 = Santa Hunters (2014) https://www.themoviedb.org/movie/307172",
-      "238302 = Saving Santa (2013) https://www.themoviedb.org/movie/238302"
-    ]
-  },
-  "Momo and the Time Thieves": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/momo-and-the-time-thieves/HO00009163/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Momo%20and%20the%20Time%20Thieves",
-    "suggestions": [
-      "1175842 = Momo (2025) https://www.themoviedb.org/movie/1175842",
-      "443398 = Finding Momo (2017) https://www.themoviedb.org/movie/443398",
-      "2265 = Momo (1986) https://www.themoviedb.org/movie/2265",
-      "628797 = The Horse Thieves. Roads of Time (2021) https://www.themoviedb.org/movie/628797",
-      "464361 = Saga of the Vagabonds, Part One: Tiger and Wolf (1937) https://www.themoviedb.org/movie/464361"
-    ]
-  },
   "National Theatre Live: Golden Boy": {
     "tmdb_id": null,
     "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/national-theatre-live-golden-boy/HO00009338/",
+    "odeon_link": "https://lewesdepot.org/film/national-theatre-live-golden-boy",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=National%20Theatre%20Live%3A%20Golden%20Boy",
     "suggestions": []
+  },
+  "ODEON Pride Nights - We Will Find Happiness": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/odeon-pride-nights-we-will-find-happiness/HO00009397/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=We%20Will%20Find%20Happiness",
+    "suggestions": []
+  },
+  "Prima Facie + panel": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018995/prima-facie-panel",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Prima%20Facie%20%2B%20panel",
+    "suggestions": [
+      "1127282 = Prima Facie (2026) https://www.themoviedb.org/movie/1127282",
+      "1089557 = Prima Facie (2022) https://www.themoviedb.org/movie/1089557",
+      "963568 = National Theatre Live: Prima Facie (2022) https://www.themoviedb.org/movie/963568",
+      "1657332 = Panel (2026) https://www.themoviedb.org/movie/1657332",
+      "1509138 = Panel (2025) https://www.themoviedb.org/movie/1509138"
+    ]
   },
   "Ramayana (Hindi)": {
     "tmdb_id": null,
@@ -251,13 +234,6 @@
       "456570 = Hindi Medium (2017) https://www.themoviedb.org/movie/456570",
       "1521588 = Film Mish Hindi (????) https://www.themoviedb.org/movie/1521588"
     ]
-  },
-  "RBO Cinema Season 2026-27: Carmen": {
-    "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/rbo-cinema-season-2026-27-carmen/HO00008945/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=RBO%20Cinema%20Season%202026-27%3A%20Carmen",
-    "suggestions": []
   },
   "RBO Cinema Season 2026-27: The Nutcracker": {
     "tmdb_id": null,
@@ -305,42 +281,48 @@
       "1341374 = The Apartment (2024) https://www.themoviedb.org/movie/1341374"
     ]
   },
-  "Relaxed Screening: Wildwood": {
+  "Relaxed:Shaun the Sheep: The Beast of Mossy Bottom": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018959/relaxed-screening-wildwood",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Relaxed%20Screening%3A%20Wildwood",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018932/relaxed-shaun-the-sheep-the-beast-of-mossy-bottom",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Relaxed%3AShaun%20the%20Sheep%3A%20The%20Beast%20of%20Mossy%20Bottom",
     "suggestions": [
-      "791523 = Wildwood (2026) https://www.themoviedb.org/movie/791523",
-      "1722901 = Wildwood Nights (1990) https://www.themoviedb.org/movie/1722901",
-      "1702928 = Wildwood (2014) https://www.themoviedb.org/movie/1702928"
+      "266502 = The Relaxed Wife (1957) https://www.themoviedb.org/movie/266502",
+      "1092557 = The Salaryman's Carefree Life: What a Relaxed Job This Is! (1962) https://www.themoviedb.org/movie/1092557",
+      "1477104 = Shaun the Sheep: The Beast of Mossy Bottom (2026) https://www.themoviedb.org/movie/1477104",
+      "263109 = Shaun the Sheep Movie (2015) https://www.themoviedb.org/movie/263109",
+      "422803 = A Shaun the Sheep Movie: Farmageddon (2019) https://www.themoviedb.org/movie/422803"
     ]
   },
-  "Stray Kids World Tour <RUN IT> LIVE VIEWING": {
+  "Roots & Resilience: Stories of Land, Food, and Change": {
     "tmdb_id": null,
-    "note": "Looks like a live/event screening, so probably no TMDB film",
-    "odeon_link": "https://www.odeon.co.uk/films/stray-kids-world-tour-run-it-live-viewing/HO00009688/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Stray%20Kids%20World%20Tour%20%3CRUN%20IT%3E%20LIVE%20VIEWING",
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018392/roots-resilience-stories-of-land-food-and-change",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Roots%20%26%20Resilience%3A%20Stories%20of%20Land%2C%20Food%2C%20and%20Change",
+    "suggestions": [
+      "30665 = Tap Roots (1948) https://www.themoviedb.org/movie/30665",
+      "1113151 = Roots (1992) https://www.themoviedb.org/movie/1113151",
+      "632248 = Roots (2019) https://www.themoviedb.org/movie/632248",
+      "1407076 = Resilience (????) https://www.themoviedb.org/movie/1407076",
+      "1483648 = Resilience (2025) https://www.themoviedb.org/movie/1483648"
+    ]
+  },
+  "Scream Unseen (24 November)": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/scream-unseen-24-november/HO00005888/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Scream%20Unseen%20%2824%20November%29",
+    "suggestions": [
+      "1374297 = Red Hot Chili Peppers live at Estadio River Plate, Buenos Aires, Argentina November 24, 2023 (2023) https://www.themoviedb.org/movie/1374297",
+      "1628492 = Fort Plain, NY // November 24th, 2024 (????) https://www.themoviedb.org/movie/1628492"
+    ]
+  },
+  "Sensory Friendly Cinema – Interactive family cinema screenings": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://lewesdepot.org/film/sensory-friendly-cinema-interactive-family-cinema-screenings",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Sensory%20Friendly%20Cinema%20%E2%80%93%20Interactive%20family%20cinema%20screenings",
     "suggestions": []
-  },
-  "Sunrise on the Reaping: Sunrise Event Screening": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/sunrise-on-the-reaping-sunrise-event-screening/HO00009789/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Sunrise%20on%20the%20Reaping%3A%20Sunrise%20Event%20Screening",
-    "suggestions": [
-      "1300968 = The Hunger Games: Sunrise on the Reaping (2026) https://www.themoviedb.org/movie/1300968"
-    ]
-  },
-  "Tabby McTat + The Room on the Broom": {
-    "tmdb_id": null,
-    "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/tabby-mctat-the-room-on-the-broom/HO00005850/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=Tabby%20McTat%20%2B%20The%20Room%20on%20the%20Broom",
-    "suggestions": [
-      "1205520 = Tabby McTat (2024) https://www.themoviedb.org/movie/1205520",
-      "152581 = Room on the Broom (2012) https://www.themoviedb.org/movie/152581"
-    ]
   },
   "THE FOUR - World Premiere": {
     "tmdb_id": null,
@@ -355,14 +337,21 @@
       "386984 = World Premiere (1941) https://www.themoviedb.org/movie/386984"
     ]
   },
-  "The Irregular at Magic High School: Yotsuba Arc": {
+  "The Holdovers + Mulled Wine & Festive Cakes": {
     "tmdb_id": null,
     "note": "",
-    "odeon_link": "https://www.odeon.co.uk/films/the-irregular-at-magic-high-school-yotsuba-arc/HO00009754/",
-    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Irregular%20at%20Magic%20High%20School%3A%20Yotsuba%20Arc",
+    "odeon_link": "https://www.picturehouses.com/movie-details/019/HO00018967/the-holdovers-mulled-wine-festive-cakes",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Holdovers%20%2B%20Mulled%20Wine%20%26%20Festive%20Cakes",
     "suggestions": [
-      "1310387 = The Irregular at Magic High School THE MOVIE - Yotsuba Succession Arc - (2026) https://www.themoviedb.org/movie/1310387"
+      "840430 = The Holdovers (2023) https://www.themoviedb.org/movie/840430"
     ]
+  },
+  "The Lord of the Rings Trilogy: Extended Editions": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.picturehouses.com/movie-details/008/HO00013893/the-lord-of-the-rings-trilogy-extended-editions",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Lord%20of%20the%20Rings%20Trilogy%3A%20Extended%20Editions",
+    "suggestions": []
   },
   "The Renowned Billy Waters": {
     "tmdb_id": null,
@@ -370,6 +359,18 @@
     "odeon_link": "https://lewesdepot.org/film/the-renowned-billy-waters",
     "tmdb_search": "https://www.themoviedb.org/search/movie?query=The%20Renowned%20Billy%20Waters",
     "suggestions": []
+  },
+  "THE SNOWMAN™ & THE SNOWMAN™ AND THE SNOWDOG": {
+    "tmdb_id": null,
+    "note": "",
+    "odeon_link": "https://www.odeon.co.uk/films/the-snowmantm-the-snowmantm-and-the-snowdog/HO00003545/",
+    "tmdb_search": "https://www.themoviedb.org/search/movie?query=THE%20SNOWMAN%E2%84%A2%20%26%20THE%20SNOWMAN%E2%84%A2%20AND%20THE%20SNOWDOG",
+    "suggestions": [
+      "185025 = The Snowman and the Snowdog (2012) https://www.themoviedb.org/movie/185025",
+      "372343 = The Snowman (2017) https://www.themoviedb.org/movie/372343",
+      "13396 = The Snowman (1982) https://www.themoviedb.org/movie/13396",
+      "13675 = Frosty the Snowman (1969) https://www.themoviedb.org/movie/13675"
+    ]
   },
   "The Trip to the Northern Lights: Special Preview and Broadcast Q&A": {
     "tmdb_id": null,
