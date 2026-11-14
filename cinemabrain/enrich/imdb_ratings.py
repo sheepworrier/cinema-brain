@@ -13,8 +13,8 @@ URL = "https://datasets.imdbws.com/title.ratings.tsv.gz"
 LOCAL = ROOT / "cache" / "title.ratings.tsv.gz"
 
 
-def _download() -> None:
-    if LOCAL.exists() and time.time() - LOCAL.stat().st_mtime < 20 * 3600:
+def _download(max_age_hours: float = 20) -> None:
+    if LOCAL.exists() and time.time() - LOCAL.stat().st_mtime < max_age_hours * 3600:
         return
     LOCAL.parent.mkdir(exist_ok=True)
     data = http_get(URL, timeout=120)
@@ -23,7 +23,7 @@ def _download() -> None:
     tmp.replace(LOCAL)
 
 
-def enrich(films: list[dict]) -> None:
+def enrich(films: list[dict], max_age_hours: float = 20) -> None:
     want: dict[str, list[dict]] = {}
     for f in films:  # the same film can appear once per cinema, so keep every copy
         if f.get("imdb", {}).get("id"):
@@ -31,7 +31,7 @@ def enrich(films: list[dict]) -> None:
     if not want:
         return
     try:
-        _download()
+        _download(max_age_hours)
     except Exception as e:
         print(f"  ! IMDb ratings download failed ({e}); using previous copy if any")
         if not LOCAL.exists():
